@@ -11,9 +11,21 @@ import {
 } from "@/components/StepIcons";
 
 export const metadata: Metadata = {
-  title: "Servicios",
+  title: "Servicios de Diseño de Interiores en Quito",
   description:
-    "Diseñamos, planificamos y acompañamos cada paso para crear espacios funcionales y estéticos: residenciales, corporativos y comerciales.",
+    "Diseño de interiores residencial, corporativo y comercial en Quito. Planificamos y acompañamos cada paso para crear espacios funcionales, estéticos y llenos de bienestar.",
+  keywords: [
+    "servicios de diseño de interiores Quito",
+    "diseño residencial Quito",
+    "diseño de oficinas corporativas",
+    "diseño de locales comerciales Ecuador",
+  ],
+  openGraph: {
+    title: "Servicios de Diseño de Interiores | Visual",
+    description:
+      "Diseño de interiores residencial, corporativo y comercial en Quito.",
+    images: [{ url: "/images/services-hero.jpg" }],
+  },
 };
 
 const steps = [

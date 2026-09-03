@@ -3,9 +3,20 @@ import Image from "next/image";
 import PageHero from "@/components/PageHero";
 
 export const metadata: Metadata = {
-  title: "Portafolio",
+  title: "Portafolio de Proyectos de Diseño de Interiores",
   description:
-    "Portafolio de proyectos de Visual: diseño de interiores residencial, corporativo y comercial en Quito.",
+    "Portafolio de proyectos de Visual: diseño de interiores residencial, corporativo y comercial en Quito y Cumbayá. Descubre nuestras transformaciones de espacios.",
+  keywords: [
+    "portafolio diseño de interiores Quito",
+    "proyectos de interiorismo Ecuador",
+    "antes y después diseño de interiores",
+  ],
+  openGraph: {
+    title: "Portafolio de Proyectos | Visual Diseño de Interiores",
+    description:
+      "Descubre nuestros proyectos residenciales, corporativos y comerciales en Quito.",
+    images: [{ url: "/images/portfolio-hero.jpg" }],
+  },
 };
 
 const residencial = [

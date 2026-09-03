@@ -56,7 +56,7 @@ export default function Home() {
       </section>
 
       {/* Detrás del diseño */}
-      <section className="grid lg:grid-cols-2">
+      <section className="grid lg:grid-cols-2 lg:items-center">
         <div className="flex flex-col justify-center px-6 py-16 sm:px-16 lg:py-24">
           <h2 className="font-display text-3xl">Detrás del diseño</h2>
           <p className="mt-6 font-sans text-base leading-relaxed">
@@ -79,12 +79,12 @@ export default function Home() {
             Sobre nosotras
           </Link>
         </div>
-        <div className="relative min-h-[360px]">
+        <div className="relative aspect-square w-full sm:aspect-[4/3] lg:aspect-square">
           <Image
             src="/images/founders-1.jpg"
-            alt="Daniela y María José, fundadoras de Visual"
+            alt="Daniela y María José, fundadoras de Visual, diseñadoras de interiores en Quito"
             fill
-            className="object-cover"
+            className="object-cover object-top"
             sizes="(min-width: 1024px) 50vw, 100vw"
           />
         </div>

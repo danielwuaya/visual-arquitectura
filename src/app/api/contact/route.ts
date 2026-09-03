@@ -14,7 +14,7 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   try {
     const data = await request.json();
-    const { firstName, lastName, email, phone, message } = data ?? {};
+    const { firstName, lastName, email, phone, projectType, message } = data ?? {};
 
     if (!email) {
       return NextResponse.json({ error: "Email requerido" }, { status: 400 });
@@ -25,6 +25,7 @@ export async function POST(request: Request) {
       lastName,
       email,
       phone,
+      projectType,
       message,
       date: new Date().toISOString(),
     });

@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 
 export const metadata: Metadata = {
-  title: "Showroom Virtual",
-  description: "Recorre nuestro showroom virtual y descubre el estilo Visual.",
+  title: "Showroom Virtual de Diseño de Interiores",
+  description:
+    "Recorre el showroom virtual de Visual en Cumbayá, Quito, y descubre el estilo de nuestro estudio de diseño de interiores.",
+  keywords: ["showroom diseño de interiores Quito", "showroom Cumbayá"],
 };
 
 export default function ShowroomVirtual() {

@@ -3,9 +3,20 @@ import Image from "next/image";
 import PageHero from "@/components/PageHero";
 
 export const metadata: Metadata = {
-  title: "Sobre Nosotros",
+  title: "Sobre Nosotros | Estudio de Diseño de Interiores en Quito",
   description:
-    "Conoce a Daniela Ludeña y María José Dávila, fundadoras de Visual, estudio de diseño de interiores en Quito.",
+    "Conoce a Daniela Ludeña y María José Dávila, fundadoras de Visual, estudio de diseño de interiores y arquitectura interior en Quito con más de 20 años de experiencia.",
+  keywords: [
+    "estudio de diseño de interiores Quito",
+    "diseñadoras de interiores Ecuador",
+    "arquitectas de interiores Quito",
+  ],
+  openGraph: {
+    title: "Sobre Nosotros | Visual Diseño de Interiores",
+    description:
+      "Conoce a Daniela Ludeña y María José Dávila, fundadoras de Visual, estudio de diseño de interiores en Quito.",
+    images: [{ url: "/images/about-hero.jpg" }],
+  },
 };
 
 export default function SobreNosotros() {
@@ -17,7 +28,7 @@ export default function SobreNosotros() {
         subtitle="Creemos que el diseño interior no solo se ve, se vive"
       />
 
-      <section className="grid lg:grid-cols-2">
+      <section className="grid lg:grid-cols-2 lg:items-center">
         <div className="flex flex-col justify-center px-6 py-16 sm:px-16 lg:py-24">
           <h2 className="font-display text-3xl">Sobre Visual</h2>
           <p className="mt-6 font-sans leading-relaxed">
@@ -30,12 +41,12 @@ export default function SobreNosotros() {
             bienestar.
           </p>
         </div>
-        <div className="relative min-h-[360px]">
+        <div className="relative aspect-square w-full sm:aspect-[4/3] lg:aspect-square">
           <Image
             src="/images/founders-2.jpg"
-            alt="Daniela y María José en su estudio"
+            alt="Daniela y María José en su estudio de diseño de interiores"
             fill
-            className="object-cover"
+            className="object-cover object-top"
             sizes="(min-width: 1024px) 50vw, 100vw"
           />
         </div>
