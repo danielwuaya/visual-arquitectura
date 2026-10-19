@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { services } from "@/lib/content";
+import { caseStudies } from "@/lib/cases";
 import { siteUrl } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -9,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...services.map((s): [string, number] => [`/servicios/${s.slug}`, 0.9]),
     ["/diseno-de-interiores-cumbaya", 0.9],
     ["/portafolio", 0.8],
+    ...caseStudies.map((c): [string, number] => [`/portafolio/${c.slug}`, 0.7]),
     ["/sobre-nosotros", 0.7],
     ["/showroom-virtual", 0.6],
     ["/contacto", 0.7],

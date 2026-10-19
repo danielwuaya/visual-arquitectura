@@ -1,7 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { projects, services } from "@/lib/content";
+import { services } from "@/lib/content";
+import { caseStudies } from "@/lib/cases";
+import CaseCard from "@/components/CaseCard";
 import { waLink } from "@/lib/site";
 import { breadcrumbSchema, faqSchema, pageMetadata, serviceSchema } from "@/lib/seo";
 import JsonLd from "@/components/JsonLd";
@@ -41,7 +43,9 @@ export default async function ServicePage({ params }: PageProps<"/servicios/[slu
     { name: s.name, path },
   ];
   const others = services.filter((x) => x.slug !== s.slug);
-  const gallery = s.gallery.map((src) => projects.find((p) => p.src === src)).filter((p) => p !== undefined);
+  const related = caseStudies.filter((c) => c.service === s.slug);
+  const allImgs = caseStudies.flatMap((c) => c.images);
+  const gallery = related.flatMap((c) => c.images).filter((i) => i.src !== s.heroImage).slice(0, 3);
 
   return (
     <>
@@ -58,7 +62,7 @@ export default async function ServicePage({ params }: PageProps<"/servicios/[slu
         title={[s.h1]}
         intro={s.intro}
         image={s.heroImage}
-        imageAlt={s.heroImage ? projects.find((p) => p.src === s.heroImage)?.alt : undefined}
+        imageAlt={allImgs.find((i) => i.src === s.heroImage)?.alt}
       >
         <div className="hero-fade mt-10 flex flex-col gap-3 sm:flex-row" style={delay(0.7)}>
           <Link href="#contacto" className="btn btn-primary">
@@ -121,6 +125,18 @@ export default async function ServicePage({ params }: PageProps<"/servicios/[slu
           </div>
         </div>
       </section>
+
+      {related.length > 0 && (
+        <section className="bg-ivory">
+          <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
+            <Eyebrow>Proyectos reales</Eyebrow>
+            <RevealLines className="mt-6 font-display text-[clamp(2rem,3.8vw,3.2rem)] leading-[1.08]" lines={["Mira lo que", <span key="a" className="accent text-taupe-deep">hemos diseñado</span>]} />
+            <div className="mt-14 grid gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
+              {related.map((c, i) => <CaseCard key={c.slug} c={c} index={i} />)}
+            </div>
+          </div>
+        </section>
+      )}
 
       <ProcessSection />
       <FaqSection faqs={s.faqs} />

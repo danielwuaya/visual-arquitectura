@@ -66,9 +66,9 @@ export const services: Service[] = [
       "Diseñamos casas, departamentos y Airbnb en Quito, Cumbayá y Tumbaco. Distribución, materiales, iluminación y mobiliario a medida, del concepto a la ejecución.",
     intro:
       "Tu casa debería sentirse como tú. Diseñamos casas, departamentos y Airbnb en Quito, Cumbayá y Tumbaco con un equilibrio cuidadoso entre estética, funcionalidad y bienestar, desde el primer boceto hasta el último detalle.",
-    image: "/images/project-living-kitchen.jpg",
-    imageAlt: "Sala y cocina abierta diseñada por Visual en Quito",
-    heroImage: "/images/project-dining.jpg",
+    image: "/images/proyectos/casa-betania/01.jpg",
+    imageAlt: "Dormitorio infantil con cabeceras en forma de nube, Casa Betania",
+    heroImage: "/images/proyectos/casa-betania/02.jpg",
     gallery: [
       "/images/project-kitchen-island.jpg",
       "/images/project-bathroom-visual.jpg",
@@ -106,8 +106,9 @@ export const services: Service[] = [
       "Diseño interior de oficinas en Quito y Cumbayá: distribución, iluminación, acústica y mobiliario funcional que potencian la productividad y reflejan tu marca.",
     intro:
       "Un buen espacio de trabajo se nota en la energía del equipo. Diseñamos oficinas en Quito y Cumbayá que cuidan la distribución, la iluminación y el mobiliario para potenciar la motivación, la eficiencia y la identidad de cada empresa.",
-    image: "/images/project-office.jpg",
-    imageAlt: "Oficina ejecutiva con panel de madera diseñada por Visual en Quito",
+    image: "/images/proyectos/consultorio-axxis/01.jpg",
+    imageAlt: "Recepción del Consultorio Axxis con panel de listones, diseño corporativo",
+    heroImage: "/images/proyectos/consultorio-axxis/02.jpg",
     gallery: [
       "/images/category-corporativo.jpg",
       "/images/project-chapel.jpg",
@@ -144,9 +145,9 @@ export const services: Service[] = [
       "Diseñamos tiendas, boutiques, showrooms y locales comerciales en Quito y Cumbayá con un diseño estratégico que atrae clientes y refleja tu marca.",
     intro:
       "Tu espacio habla por tu marca. Diseñamos tiendas, boutiques, showrooms y locales en Quito y Cumbayá con una estrategia clara: atraer, guiar al cliente y convertir la visita en venta.",
-    image: "/images/category-comercial.jpg",
-    imageAlt: "Boutique de moda con exhibidores iluminados diseñada por Visual",
-    heroImage: "/images/project-retail-1.jpg",
+    image: "/images/proyectos/boutique-almara/01.jpg",
+    imageAlt: "Recepción de la Boutique Almara con counter curvo menta",
+    heroImage: "/images/proyectos/boutique-almara/02.jpg",
     gallery: [
       "/images/project-retail-1.jpg",
       "/images/project-bar.jpg",

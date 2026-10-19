@@ -17,7 +17,7 @@ export function pageMetadata({
   title,
   description,
   path,
-  image = "/images/home-hero.jpg",
+  image = "/images/proyectos/casa-betania/02.jpg",
   imageAlt = "Diseño de interiores por Visual en Quito y Cumbayá",
   absoluteTitle,
 }: PageMetaInput): Metadata {

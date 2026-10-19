@@ -2,6 +2,8 @@ import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { homeFaqs, services, testimonials } from "@/lib/content";
+import { caseStudies } from "@/lib/cases";
+import CaseCard from "@/components/CaseCard";
 import { waLink } from "@/lib/site";
 import { faqSchema, pageMetadata } from "@/lib/seo";
 import JsonLd from "@/components/JsonLd";
@@ -18,7 +20,6 @@ export const metadata = pageMetadata({
   path: "/",
 });
 
-const serviceImages = ["/images/project-living-kitchen.jpg", "/images/project-office.jpg", "/images/category-comercial.jpg"];
 
 const marquee = [
   "Diseño residencial",
@@ -89,17 +90,17 @@ export default function Home() {
           <div className="relative lg:col-span-6">
             <div className="hero-unveil arch relative ml-auto aspect-[4/5] w-full max-w-[560px] overflow-hidden bg-sand" style={delay(0.2)}>
               <Image
-                src="/images/home-hero.jpg"
-                alt="Dormitorio en tonos naturales diseñado por Visual, estudio de diseño de interiores en Cumbayá"
+                src="/images/proyectos/boutique-almara/01.jpg"
+                alt="Recepción de la Boutique Almara diseñada por Visual, estudio de diseño de interiores en Cumbayá"
                 fill
                 priority
                 fetchPriority="high"
                 sizes="(min-width: 1024px) 560px, 100vw"
-                className="object-cover object-[38%_50%]"
+                className="object-cover object-[50%_40%]"
               />
             </div>
             <div className="hero-fade absolute -bottom-8 left-0 hidden aspect-square w-44 overflow-hidden rounded-full border-[6px] border-ivory sm:block lg:-left-6 lg:w-52" style={delay(1.1)}>
-              <Image src="/images/project-kitchen-island.jpg" alt="Cocina con isla diseñada por Visual" fill sizes="208px" className="object-cover" />
+              <Image src="/images/proyectos/casa-betania/01.jpg" alt="Dormitorio infantil con cabeceras en forma de nube, Casa Betania" fill sizes="208px" className="object-cover" />
             </div>
             <Link
               href="/contacto"
@@ -183,7 +184,7 @@ export default function Home() {
                 style={delay(i * 0.12)}
               >
                 <div className="zoom relative aspect-[3/4] overflow-hidden bg-sand" data-reveal="img" style={delay(i * 0.12)}>
-                  <Image src={serviceImages[i]} alt={s.imageAlt} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover" />
+                  <Image src={s.image} alt={s.imageAlt} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover" />
                   <span className="absolute left-5 top-5 font-display text-sm text-ivory mix-blend-difference">0{i + 1}</span>
                 </div>
                 <h3 className="mt-6 font-display text-2xl">{s.name}</h3>
@@ -214,31 +215,12 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="mt-16 grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-12">
-            <figure className="col-span-2 lg:col-span-7">
-              <div className="parallax relative aspect-[3/2] overflow-hidden bg-sand" data-reveal="img">
-                <Image src="/images/project-dining.jpg" alt="Comedor contemporáneo con lámpara lineal, proyecto residencial de Visual en Quito" fill sizes="(min-width: 1024px) 58vw, 100vw" className="object-cover" />
+          <div className="mt-16 grid gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
+            {caseStudies.slice(0, 3).map((c, i) => (
+              <div key={c.slug} className={i === 1 ? "lg:mt-24" : ""}>
+                <CaseCard c={c} index={i} />
               </div>
-              <figcaption className="mt-3 text-sm">Comedor contemporáneo · Residencial</figcaption>
-            </figure>
-            <figure className="col-span-1 lg:col-span-5 lg:mt-24">
-              <div className="zoom relative aspect-[3/4] overflow-hidden bg-sand" data-reveal="img" style={delay(0.1)}>
-                <Image src="/images/project-bathroom-visual.jpg" alt="Baño con piedra natural y luz cálida diseñado por Visual" fill sizes="(min-width: 1024px) 40vw, 50vw" className="object-cover" />
-              </div>
-              <figcaption className="mt-3 text-sm">Baño en piedra natural · Residencial</figcaption>
-            </figure>
-            <figure className="col-span-1 lg:col-span-4 lg:-mt-20">
-              <div className="zoom relative aspect-[3/4] overflow-hidden bg-sand" data-reveal="img">
-                <Image src="/images/project-tv-corridor.jpg" alt="Mueble de TV con celosía de madera diseñado a medida" fill sizes="(min-width: 1024px) 33vw, 50vw" className="object-cover" />
-              </div>
-              <figcaption className="mt-3 text-sm">Mueble de TV a medida · Residencial</figcaption>
-            </figure>
-            <figure className="col-span-2 lg:col-span-8">
-              <div className="parallax relative aspect-[4/3] overflow-hidden bg-sand sm:aspect-[16/10]" data-reveal="img" style={delay(0.1)}>
-                <Image src="/images/project-retail-1.jpg" alt="Diseño de local comercial de ropa deportiva en Quito" fill sizes="(min-width: 1024px) 66vw, 100vw" className="object-cover" />
-              </div>
-              <figcaption className="mt-3 text-sm">Tienda deportiva · Comercial</figcaption>
-            </figure>
+            ))}
           </div>
         </div>
       </section>

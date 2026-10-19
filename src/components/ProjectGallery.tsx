@@ -2,17 +2,22 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { Project, ProjectCategory } from "@/lib/content";
 import { delay } from "@/components/ui";
 
-const filters: { key: "todos" | ProjectCategory; label: string }[] = [
-  { key: "todos", label: "Todos" },
-  { key: "residencial", label: "Residencial" },
-  { key: "corporativo", label: "Corporativo y comercial" },
-];
+export type GalleryItem = { src: string; title: string; alt: string; category: string; ratio: number };
 
-export default function ProjectGallery({ projects }: { projects: Project[] }) {
-  const [filter, setFilter] = useState<(typeof filters)[number]["key"]>("todos");
+const labels: Record<string, string> = {
+  residencial: "Residencial",
+  corporativo: "Corporativo y comercial",
+  comercial: "Comercial",
+};
+
+export default function ProjectGallery({ projects, filters: showFilters = true }: { projects: GalleryItem[]; filters?: boolean }) {
+  const filters = [
+    { key: "todos", label: "Todos" },
+    ...Array.from(new Set(projects.map((p) => p.category))).map((c) => ({ key: c, label: labels[c] ?? c })),
+  ];
+  const [filter, setFilter] = useState("todos");
   const [index, setIndex] = useState<number | null>(null);
   const [animKey, setAnimKey] = useState(0);
   const touchX = useRef<number | null>(null);
@@ -43,7 +48,8 @@ export default function ProjectGallery({ projects }: { projects: Project[] }) {
 
   return (
     <>
-      <div role="tablist" aria-label="Filtrar proyectos" className="flex flex-wrap gap-2">
+      {showFilters && (
+      <div role="tablist" aria-label="Filtrar proyectos" className="mb-12 flex flex-wrap gap-2">
         {filters.map((f) => {
           const count = f.key === "todos" ? projects.length : projects.filter((p) => p.category === f.key).length;
           return (
@@ -64,8 +70,9 @@ export default function ProjectGallery({ projects }: { projects: Project[] }) {
           );
         })}
       </div>
+      )}
 
-      <ul key={animKey} className="mt-12 columns-1 gap-5 sm:columns-2 lg:columns-3 [&>li]:mb-5">
+      <ul key={animKey} className="columns-1 gap-5 sm:columns-2 lg:columns-3 [&>li]:mb-5">
         {visible.map((p, i) => (
           <li key={p.src} className="break-inside-avoid hero-fade" style={delay(Math.min(i, 8) * 0.06)}>
             <button
@@ -85,7 +92,7 @@ export default function ProjectGallery({ projects }: { projects: Project[] }) {
               <span className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
               <span className="absolute inset-x-5 bottom-5 translate-y-3 text-ivory opacity-0 transition-all duration-700 group-hover:translate-y-0 group-hover:opacity-100">
                 <span className="eyebrow block text-ivory/70">
-                  {p.category === "residencial" ? "Residencial" : "Corporativo / comercial"}
+                  {labels[p.category] ?? p.category}
                 </span>
                 <span className="mt-1 block font-display text-xl">{p.title}</span>
               </span>

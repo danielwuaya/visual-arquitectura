@@ -57,13 +57,13 @@ export const metadata: Metadata = {
     siteName,
     locale: "es_EC",
     type: "website",
-    images: [{ url: "/images/home-hero.jpg", width: 1311, height: 737, alt: "Diseño de interiores por Visual en Quito y Cumbayá" }],
+    images: [{ url: "/images/proyectos/casa-betania/02.jpg", width: 2400, height: 1600, alt: "Diseño de interiores por Visual en Quito y Cumbayá" }],
   },
   twitter: {
     card: "summary_large_image",
     title: defaultTitle,
     description: defaultDescription,
-    images: ["/images/home-hero.jpg"],
+    images: ["/images/proyectos/casa-betania/02.jpg"],
   },
   robots: {
     index: true,
