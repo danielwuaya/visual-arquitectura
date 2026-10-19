@@ -74,7 +74,7 @@ export default function Home() {
               {[
                 ["+20", "años de experiencia"],
                 ["Diseño", "y ejecución de obra"],
-                ["Showroom", "propio en Cumbayá"],
+                ["Showroom", "digital en 4K"],
               ].map(([n, label]) => (
                 <div key={label}>
                   <dt className="sr-only">{label}</dt>
@@ -298,9 +298,11 @@ export default function Home() {
       </section>
 
       <CtaBand
-        title={["Visita nuestro", <span key="a" className="accent text-sand">showroom en Cumbayá</span>]}
-        text="Toca los materiales, conoce nuestro estilo y conversemos sobre tu proyecto en persona. Coordinamos tu visita por WhatsApp."
-        waMessage="Hola Visual, me gustaría agendar una visita al showroom en Cumbayá."
+        title={["Recorre nuestro", <span key="a" className="accent text-sand">showroom digital</span>]}
+        text="Mira nuestros proyectos en pantalla completa y alta resolución, ambiente por ambiente, desde donde estés."
+        image="/images/proyectos/casa-betania/03.jpg"
+        cta={{ href: "/showroom-virtual", label: "Entrar al showroom" }}
+        waMessage="Hola Visual, vi su showroom digital y me gustaría diseñar mi espacio."
       />
 
       <FaqSection faqs={homeFaqs} />

@@ -6,7 +6,7 @@ export const nav = [
   { label: "Servicios", href: "/servicios" },
   { label: "Portafolio", href: "/portafolio" },
   { label: "Nosotras", href: "/sobre-nosotros" },
-  { label: "Showroom", href: "/showroom-virtual" },
+  { label: "Showroom digital", href: "/showroom-virtual" },
   { label: "Contacto", href: "/contacto" },
 ];
 

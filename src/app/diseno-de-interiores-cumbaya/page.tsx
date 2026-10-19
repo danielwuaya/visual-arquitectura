@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { projects, services, type Faq } from "@/lib/content";
-import { areas, contact, waLink } from "@/lib/site";
+import { areas, waLink } from "@/lib/site";
 import { breadcrumbSchema, faqSchema, pageMetadata } from "@/lib/seo";
 import JsonLd from "@/components/JsonLd";
 import TrackLink from "@/components/TrackLink";
@@ -12,9 +12,9 @@ import { ContactSection, FaqSection, PageHeader } from "@/components/sections";
 export const metadata = pageMetadata({
   title: "Diseño de Interiores en Cumbayá y Tumbaco",
   description:
-    "Diseñadoras de interiores con estudio y showroom en Cumbayá. Diseñamos casas, departamentos, oficinas y locales en Cumbayá, Tumbaco, Nayón y Puembo. Agenda una visita.",
+    "Diseñadoras de interiores con estudio en Cumbayá. Diseñamos casas, departamentos, oficinas y locales en Cumbayá, Tumbaco, Nayón y Puembo. Agenda tu asesoría.",
   path: "/diseno-de-interiores-cumbaya",
-  image: "/images/showroom-hero.jpg",
+  image: "/images/proyectos/casa-betania/01.jpg",
 });
 
 const crumbs = [
@@ -23,7 +23,7 @@ const crumbs = [
 ];
 
 const faqs: Faq[] = [
-  { q: "¿Dónde está su estudio en Cumbayá?", a: `Nuestro estudio y showroom están en ${contact.address}. Te recomendamos agendar tu visita por WhatsApp para atenderte personalmente.` },
+  { q: "¿Tienen estudio en Cumbayá?", a: "Sí, nuestro estudio está en Cumbayá. Trabajamos visitando cada proyecto, así que coordinamos contigo una visita a tu casa, departamento u oficina." },
   { q: "¿Trabajan en Tumbaco, Nayón y Puembo?", a: "Sí. Al estar en Cumbayá, atendemos con frecuencia proyectos en Tumbaco, Nayón, Puembo y en todo Quito." },
   { q: "¿Pueden visitar mi casa o departamento?", a: "Sí. La primera etapa del proceso es visitar tu espacio, conversar sobre tus necesidades y tomar medidas para planificar el diseño." },
 ];
@@ -40,17 +40,17 @@ export default function Cumbaya() {
         breadcrumbs={crumbs}
         eyebrow="Estudio local · Cumbayá"
         title={["Diseño de interiores", <span key="a" className="accent text-taupe-deep">en Cumbayá y Tumbaco</span>]}
-        intro="Somos un estudio de diseño de interiores con showroom en Cumbayá. Conocemos el valle, sus casas, su luz y su estilo de vida, y diseñamos espacios que lo aprovechan."
-        image="/images/showroom-hero.jpg"
-        imageAlt="Showroom de Visual Diseño de Interiores en Cumbayá"
+        intro="Somos un estudio de diseño de interiores con base en Cumbayá. Conocemos el valle, sus casas, su luz y su estilo de vida, y diseñamos espacios que lo aprovechan."
+        image="/images/proyectos/casa-betania/01.jpg"
+        imageAlt="Dormitorio con vista a las montañas diseñado por Visual en el valle"
       >
         <div className="hero-fade mt-10 flex flex-col gap-3 sm:flex-row" style={delay(0.7)}>
-          <TrackLink event="whatsapp_click" placement="cumbaya-hero" href={waLink("Hola Visual, me gustaría agendar una visita al showroom en Cumbayá.")} className="btn btn-primary">
-            <WhatsAppIcon className="h-4 w-4" /> Agenda una visita
+          <TrackLink event="whatsapp_click" placement="cumbaya-hero" href={waLink("Hola Visual, estoy en el valle y me gustaría una asesoría de diseño de interiores.")} className="btn btn-primary">
+            <WhatsAppIcon className="h-4 w-4" /> Agenda tu asesoría
           </TrackLink>
-          <a href={contact.mapsUrl} target="_blank" rel="noopener noreferrer" className="btn btn-outline">
-            Cómo llegar <ArrowIcon />
-          </a>
+          <Link href="/showroom-virtual" className="btn btn-outline">
+            Ver showroom digital <ArrowIcon />
+          </Link>
         </div>
       </PageHeader>
 
@@ -69,8 +69,8 @@ export default function Cumbaya() {
             </p>
             <p>
               Estar en el valle nos permite visitar tu proyecto con facilidad, coordinar
-              proveedores de confianza y supervisar la obra de cerca. Además, puedes venir a
-              nuestro showroom a ver materiales, acabados y referencias antes de decidir.
+              proveedores de confianza y supervisar la obra de cerca. Y si quieres ver nuestro
+              trabajo antes de decidir, puedes recorrer nuestro showroom digital en alta resolución.
             </p>
             <p>
               Trabajamos proyectos residenciales, oficinas y locales comerciales, desde una
@@ -119,26 +119,15 @@ export default function Cumbaya() {
                 <li key={a} className="rounded-full border border-ink/20 px-5 py-2.5 font-display text-lg text-ink" data-reveal="up">{a}</li>
               ))}
             </ul>
-            <address className="mt-10 not-italic leading-relaxed" data-reveal="up">
-              <span className="eyebrow block">Showroom</span>
-              <span className="mt-3 block text-ink">{contact.address}</span>
-              <span className="block">Quito, Ecuador</span>
-            </address>
           </div>
-          <div className="relative aspect-[4/3] overflow-hidden bg-sand lg:col-span-7" data-reveal="mask">
-            <iframe
-              title="Ubicación del showroom de Visual en Cumbayá"
-              src={contact.mapsEmbed}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="absolute inset-0 h-full w-full grayscale-[0.6] sepia-[0.15]"
-            />
+          <div className="relative aspect-[4/3] overflow-hidden bg-sand lg:col-span-7" data-reveal="img">
+            <Image src="/images/proyectos/casa-betania/10.jpg" alt="Sala de estar con ventanales y vista a las montañas del valle" fill sizes="(min-width: 1024px) 58vw, 100vw" className="object-cover" />
           </div>
         </div>
       </section>
 
       <FaqSection faqs={faqs} title="Preguntas sobre Cumbayá" />
-      <ContactSection placement="cumbaya" title={["Agenda tu visita", "en Cumbayá"]} />
+      <ContactSection placement="cumbaya" title={["Agenda tu asesoría", "en Cumbayá"]} />
     </>
   );
 }

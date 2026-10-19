@@ -98,8 +98,8 @@ export function ContactSection({
             lines={[title[0], <span key="a" className="accent text-taupe-deep">{title[1]}</span>]}
           />
           <p className="mt-6 max-w-md leading-relaxed" data-reveal="up">
-            Cuéntanos sobre tu espacio y coordinamos una visita en tu proyecto o en
-            nuestro showroom en Cumbayá. Te guiamos desde la primera idea hasta la entrega.
+            Cuéntanos sobre tu espacio y coordinamos una visita a tu proyecto. Te
+            guiamos desde la primera idea hasta la entrega.
           </p>
 
           <div className="mt-10 flex items-center gap-5" data-reveal="up" style={delay(0.1)}>
@@ -129,9 +129,9 @@ export function ContactSection({
               </TrackLink>
             </li>
             <li>
-              <a href={contact.mapsUrl} target="_blank" rel="noopener noreferrer" className="link-u">
-                {contact.address}
-              </a>
+              <Link href="/showroom-virtual" className="link-u-on">
+                Recorre nuestro showroom digital
+              </Link>
             </li>
           </ul>
         </div>
@@ -207,13 +207,15 @@ export function FaqSection({ faqs, title = "Preguntas frecuentes" }: { faqs: Faq
 export function CtaBand({
   title,
   text,
-  image = "/images/showroom-hero.jpg",
+  image = "/images/proyectos/casa-betania/03.jpg",
   waMessage,
+  cta = { href: "/contacto", label: "Agenda tu asesoría" },
 }: {
   title: ReactNode[];
   text: string;
   image?: string;
   waMessage?: string;
+  cta?: { href: string; label: string };
 }) {
   return (
     <section className="relative overflow-hidden bg-ink text-ivory">
@@ -227,8 +229,8 @@ export function CtaBand({
           {text}
         </p>
         <div className="mt-10 flex flex-col gap-3 sm:flex-row" data-reveal="up" style={delay(0.1)}>
-          <Link href="/contacto" className="btn btn-light">
-            Agenda tu asesoría <ArrowIcon />
+          <Link href={cta.href} className="btn btn-light">
+            {cta.label} <ArrowIcon />
           </Link>
           <TrackLink event="whatsapp_click" placement="cta-band" href={waLink(waMessage)} className="btn btn-outline-light">
             <WhatsAppIcon className="h-4 w-4" /> WhatsApp

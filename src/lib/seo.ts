@@ -59,7 +59,7 @@ export function localBusinessSchema() {
     url: siteUrl,
     logo: `${siteUrl}/icon.svg`,
     image: [
-      `${siteUrl}/images/showroom-hero.jpg`,
+      `${siteUrl}/images/proyectos/boutique-almara/01.jpg`,
       `${siteUrl}/images/home-hero.jpg`,
       `${siteUrl}/images/founders-1.jpg`,
     ],
@@ -72,7 +72,6 @@ export function localBusinessSchema() {
       addressRegion: contact.region,
       addressCountry: "EC",
     },
-    hasMap: contact.mapsUrl,
     areaServed: areas.map((name) => ({ "@type": "Place", name: `${name}, Ecuador` })),
     founder: [
       { "@type": "Person", name: "Daniela Ludeña", jobTitle: "Diseñadora de interiores, co-fundadora" },

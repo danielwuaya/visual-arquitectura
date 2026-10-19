@@ -1,94 +1,78 @@
-import Image from "next/image";
-import { contact, waLink } from "@/lib/site";
-import { breadcrumbSchema, pageMetadata } from "@/lib/seo";
+import { caseStudies } from "@/lib/cases";
+import { showroomSlides } from "@/lib/showroom";
+import { siteUrl } from "@/lib/site";
+import { breadcrumbSchema, businessId, pageMetadata } from "@/lib/seo";
 import JsonLd from "@/components/JsonLd";
-import TrackLink from "@/components/TrackLink";
-import { WhatsAppIcon } from "@/components/icons";
-import { ArrowIcon, Eyebrow, RevealLines, delay } from "@/components/ui";
-import { ContactSection, PageHeader } from "@/components/sections";
+import DigitalShowroom, { type ShowroomRoom } from "@/components/DigitalShowroom";
+import { delay } from "@/components/ui";
+import { ContactSection } from "@/components/sections";
 
 export const metadata = pageMetadata({
-  title: "Showroom de Diseño de Interiores en Cumbayá",
+  title: "Showroom Digital en 4K | Proyectos de Diseño de Interiores",
   description:
-    "Visita el showroom de Visual en Cumbayá: conoce materiales, acabados y nuestro estilo de diseño de interiores en persona. Agenda tu visita por WhatsApp.",
+    "Recorre el showroom digital de Visual: proyectos reales de diseño de interiores en Quito y Cumbayá en pantalla completa y alta resolución (hasta 4K), ambiente por ambiente.",
   path: "/showroom-virtual",
-  image: "/images/showroom-hero.jpg",
+  image: "/images/proyectos/boutique-almara/01.jpg",
 });
 
 const crumbs = [
   { name: "Inicio", path: "/" },
-  { name: "Showroom", path: "/showroom-virtual" },
+  { name: "Showroom digital", path: "/showroom-virtual" },
 ];
 
-const reasons = [
-  { title: "Toca los materiales", text: "Maderas, piedras, textiles y acabados para elegir con seguridad." },
-  { title: "Conoce nuestro estilo", text: "Recorre ambientes y referencias de proyectos reales." },
-  { title: "Conversa con las diseñadoras", text: "Una reunión personal para entender tu espacio y tus ideas." },
-];
+const rooms: ShowroomRoom[] = caseStudies
+  .filter((c) => showroomSlides[c.slug]?.length)
+  .map((c) => ({ slug: c.slug, title: c.title, type: c.type, slides: showroomSlides[c.slug] }));
+
+const totalPhotos = rooms.reduce((n, r) => n + r.slides.length, 0);
 
 export default function Showroom() {
   return (
     <>
-      <JsonLd data={breadcrumbSchema(crumbs)} />
-      <PageHeader
-        breadcrumbs={crumbs}
-        eyebrow="Showroom · Cumbayá"
-        title={["Ven a vivir", <span key="a" className="accent text-taupe-deep">el diseño en persona</span>]}
-        intro="Nuestro showroom en Cumbayá es el punto de partida de muchos proyectos. Estamos preparando un recorrido virtual; mientras tanto, te esperamos para una visita guiada."
-        image="/images/showroom-hero.jpg"
-        imageAlt="Showroom de Visual Diseño de Interiores en Cumbayá con recepción en madera"
-      >
-        <div className="hero-fade mt-10 flex flex-col gap-3 sm:flex-row" style={delay(0.7)}>
-          <TrackLink event="whatsapp_click" placement="showroom-hero" href={waLink("Hola Visual, me gustaría agendar una visita al showroom en Cumbayá.")} className="btn btn-primary">
-            <WhatsAppIcon className="h-4 w-4" /> Agenda tu visita
-          </TrackLink>
-          <a href={contact.mapsUrl} target="_blank" rel="noopener noreferrer" className="btn btn-outline">
-            Cómo llegar <ArrowIcon />
-          </a>
-        </div>
-      </PageHeader>
+      <JsonLd
+        data={[
+          breadcrumbSchema(crumbs),
+          {
+            "@context": "https://schema.org",
+            "@type": "ImageGallery",
+            name: "Showroom digital de Visual Diseño de Interiores",
+            url: `${siteUrl}/showroom-virtual`,
+            creator: { "@id": businessId },
+            image: rooms.flatMap((r) => r.slides.map((s) => `${siteUrl}${s.src}`)),
+          },
+        ]}
+      />
 
-      <section className="bg-ivory">
-        <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
-          <Eyebrow>Tu visita</Eyebrow>
-          <div className="mt-12 grid gap-12 md:grid-cols-3">
-            {reasons.map((r, i) => (
-              <div key={r.title} className="border-t border-ink/15 pt-8" data-reveal="up" style={delay(i * 0.1)}>
-                <span className="font-sans text-xs text-taupe-deep">0{i + 1}</span>
-                <h2 className="mt-3 font-display text-2xl">{r.title}</h2>
-                <p className="mt-3 leading-relaxed">{r.text}</p>
-              </div>
-            ))}
+      <section className="grain relative bg-ivory pt-32 lg:pt-40">
+        <div className="mx-auto grid max-w-[1400px] gap-8 px-5 pb-12 sm:px-8 lg:grid-cols-12 lg:items-end lg:px-12 lg:pb-16">
+          <div className="lg:col-span-8">
+            <p className="eyebrow hero-fade" style={delay(0.1)}>
+              Showroom digital · hasta 4K
+            </p>
+            <h1 className="mt-6 font-display text-[clamp(2.6rem,6.4vw,6rem)] leading-[1.02]">
+              <span className="hero-line block overflow-hidden pb-[0.06em]"><span style={delay(0.15)}>Recorre nuestros</span></span>
+              <span className="hero-line block overflow-hidden pb-[0.1em]">
+                <span style={delay(0.27)} className="accent text-taupe-deep">proyectos reales</span>
+              </span>
+            </h1>
+          </div>
+          <div className="hero-fade lg:col-span-4 lg:pb-3" style={delay(0.5)}>
+            <p className="text-[1.05rem] leading-relaxed">
+              {rooms.length} proyectos y {totalPhotos} fotos en alta resolución, ambiente por ambiente. Ponlo en
+              pantalla completa y míralo como si estuvieras ahí.
+            </p>
+            <p className="mt-4 text-xs text-body/70">
+              Usa las flechas del teclado o desliza · Espacio para pausar · F para pantalla completa
+            </p>
           </div>
         </div>
       </section>
 
-      <section className="bg-linen">
-        <div className="mx-auto grid max-w-[1400px] gap-12 px-5 py-24 sm:px-8 lg:grid-cols-12 lg:items-center lg:px-12 lg:py-32">
-          <div className="lg:col-span-5">
-            <RevealLines className="font-display text-[clamp(2rem,3.8vw,3.2rem)] leading-[1.08]" lines={["Dónde", <span key="a" className="accent text-taupe-deep">encontrarnos</span>]} />
-            <address className="mt-8 not-italic text-[1.05rem] leading-relaxed" data-reveal="up">
-              <span className="block text-ink">{contact.street}</span>
-              <span className="block">Cumbayá, Quito — Ecuador</span>
-            </address>
-            <p className="mt-6 text-sm" data-reveal="up">Atendemos con cita previa para dedicarte el tiempo que tu proyecto merece.</p>
-            <div className="mt-8 relative aspect-[4/3] overflow-hidden" data-reveal="img">
-              <Image src="/images/team-laptop.jpg" alt="Diseñadoras de Visual revisando un proyecto en el showroom" fill sizes="(min-width: 1024px) 35vw, 100vw" className="object-cover" />
-            </div>
-          </div>
-          <div className="relative aspect-square overflow-hidden bg-sand lg:col-span-7" data-reveal="mask">
-            <iframe
-              title="Mapa del showroom de Visual en Cumbayá"
-              src={contact.mapsEmbed}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="absolute inset-0 h-full w-full grayscale-[0.6] sepia-[0.15]"
-            />
-          </div>
-        </div>
+      <section aria-label="Visor del showroom">
+        <DigitalShowroom rooms={rooms} />
       </section>
 
-      <ContactSection placement="showroom" title={["Agenda tu visita", "al showroom"]} />
+      <ContactSection placement="showroom" title={["¿Te imaginas tu espacio", "así?"]} />
     </>
   );
 }

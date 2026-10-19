@@ -21,7 +21,7 @@ Abre [http://localhost:3000](http://localhost:3000).
 
 ## Estructura
 
-- `src/app/` — páginas (Inicio, Sobre nosotros, Servicios, Portafolio, Showroom virtual)
+- `src/app/` — páginas (Inicio, Sobre nosotros, Servicios, Portafolio y proyectos, Showroom digital, Servicios, Cumbayá, Contacto)
 - `src/components/` — Header, Footer, formulario de contacto, iconos
 - `src/lib/site.ts` — datos de contacto y navegación (edítalo para cambiar teléfono, dirección, redes, etc.)
 - `public/images/` — fotografías del sitio

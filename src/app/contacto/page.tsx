@@ -40,7 +40,7 @@ export default function Contacto() {
             </h1>
             <p className="hero-fade mt-6 max-w-md text-[1.05rem] leading-relaxed" style={delay(0.5)}>
               Cuéntanos qué espacio quieres transformar. Te contactamos para coordinar una
-              visita a tu proyecto o a nuestro showroom en Cumbayá.
+              visita a tu proyecto en Quito, Cumbayá o Tumbaco.
             </p>
 
             <div className="hero-fade mt-10 space-y-8" style={delay(0.65)}>
@@ -63,9 +63,9 @@ export default function Contacto() {
                   </dd>
                 </div>
                 <div className="sm:col-span-2">
-                  <dt className="eyebrow">Showroom</dt>
+                  <dt className="eyebrow">Showroom digital</dt>
                   <dd className="mt-2">
-                    <a href={contact.mapsUrl} target="_blank" rel="noopener noreferrer" className="link-u text-ink">{contact.address}, Quito</a>
+                    <a href="/showroom-virtual" className="link-u text-ink">Recorre nuestros proyectos en alta resolución</a>
                   </dd>
                 </div>
               </dl>

@@ -55,13 +55,11 @@ export default function Footer() {
           </div>
 
           <div className="lg:col-span-3">
-            <p className="eyebrow text-taupe">Estudio y showroom</p>
+            <p className="eyebrow text-taupe">Estudio</p>
             <address className="mt-4 not-italic leading-relaxed">
-              <a href={contact.mapsUrl} target="_blank" rel="noopener noreferrer" className="link-u-on text-ivory">
-                {contact.street}
-                <br />
+              <span className="text-ivory">
                 Cumbayá, Quito — Ecuador
-              </a>
+              </span>
             </address>
             <p className="eyebrow mt-8 text-taupe">Contacto</p>
             <ul className="mt-4 space-y-2">

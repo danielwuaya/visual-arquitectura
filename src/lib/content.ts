@@ -151,7 +151,7 @@ export const services: Service[] = [
     gallery: [
       "/images/project-retail-1.jpg",
       "/images/project-bar.jpg",
-      "/images/showroom-hero.jpg",
+      "/images/category-comercial.jpg",
     ],
     includes: [
       { title: "Recorrido del cliente", text: "Distribución que guía la mirada y el paso hacia tus productos clave." },
@@ -176,7 +176,7 @@ export const services: Service[] = [
 ];
 
 export const process = [
-  { title: "Agenda tu visita", text: "Conversamos sobre tu espacio, tus necesidades y tu estilo. Visitamos el lugar o nos reunimos en nuestro showroom en Cumbayá." },
+  { title: "Agenda tu asesoría", text: "Conversamos sobre tu espacio, tus necesidades y tu estilo, y visitamos el lugar para entender su potencial." },
   { title: "Planificación", text: "Definimos alcance, prioridades y tiempos. Levantamos medidas y analizamos el potencial del espacio." },
   { title: "Diseño", text: "Creamos el concepto, la distribución, los materiales y los renders para que veas el resultado antes de construir." },
   { title: "Presupuesto", text: "Te entregamos un presupuesto claro y detallado, sin sorpresas, para que decidas con tranquilidad." },
@@ -184,7 +184,7 @@ export const process = [
 ];
 
 export const homeFaqs: Faq[] = [
-  { q: "¿En qué zonas trabajan?", a: "Nuestro estudio y showroom están en Cumbayá. Diseñamos proyectos en Cumbayá, Tumbaco, Quito, Nayón y Puembo, y evaluamos proyectos en otras ciudades del Ecuador." },
+  { q: "¿En qué zonas trabajan?", a: "Nuestro estudio está en Cumbayá. Diseñamos proyectos en Cumbayá, Tumbaco, Quito, Nayón y Puembo, y evaluamos proyectos en otras ciudades del Ecuador." },
   { q: "¿Cómo es la primera asesoría?", a: "Agendas una cita por WhatsApp o con el formulario. Conversamos sobre tu espacio, lo que necesitas y tu estilo, y te explicamos cómo trabajaríamos tu proyecto." },
   { q: "¿Solo diseñan o también ejecutan la obra?", a: "Hacemos ambas cosas. Puedes contratar solo el diseño o el acompañamiento completo: diseño, presupuesto y ejecución con nuestro equipo de proveedores." },
   { q: "¿Trabajan con mi presupuesto?", a: "Sí. Antes de ejecutar preparamos un presupuesto detallado y ajustamos materiales y alcance para que el diseño responda a tu inversión." },
