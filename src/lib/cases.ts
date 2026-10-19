@@ -20,6 +20,8 @@ export type CaseStudy = {
   images: CaseImage[];
   /** Fotos que muestran el proceso de obra (opcional). */
   process?: CaseImage[];
+  /** true si las imágenes son renders 3D de la propuesta (no fotos de obra terminada). */
+  render?: boolean;
 };
 
 const P = (slug: string, n: number, w: number, h: number, alt: string): CaseImage => ({
@@ -32,7 +34,7 @@ const P = (slug: string, n: number, w: number, h: number, alt: string): CaseImag
 const L = [2400, 1600] as const; // horizontal
 const V = [1800, 2400] as const; // vertical
 
-export const caseStudies: CaseStudy[] = [
+const baseCases: CaseStudy[] = [
   {
     slug: "casa-betania",
     title: "Casa Betania",
@@ -120,6 +122,10 @@ export const caseStudies: CaseStudy[] = [
       P("consultorio-axxis", 7, 1803, 2400, "Pasillo con divisiones de vidrio y luz lineal"),
       P("consultorio-axxis", 8, 1803, 2400, "Área de apoyo con lavamanos y lámparas colgantes"),
       P("consultorio-axxis", 9, 1803, 2400, "Nichos iluminados empotrados en la pared"),
+      P("consultorio-axxis", 12, 1440, 1920, "Oficina médica con panel de listones de madera y escritorio a medida"),
+      P("consultorio-axxis", 11, 1440, 1920, "Sala de espera con butacas y panel de madera iluminado"),
+      P("consultorio-axxis", 10, 1440, 1920, "Ingreso al consultorio con paneles de madera y luz lineal"),
+      P("consultorio-axxis", 13, 1440, 1920, "Consultorio con repisas abiertas y mueble bajo blanco"),
     ],
   },
   {
@@ -201,6 +207,240 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
 ];
+
+
+const H = [1440, 1920] as const; // vertical de celular
+
+const newCases: CaseStudy[] = [
+  {
+    slug: "qorner",
+    title: "Departamento Qorner",
+    category: "residencial",
+    type: "Departamento completo",
+    summary:
+      "Un departamento sereno en tonos piedra y madera: sala con mesa de mármol, dormitorio tapizado, vestidor y un espejo orgánico retroiluminado.",
+    description: [
+      "Diseñamos un departamento de líneas suaves y paleta neutra, donde las texturas hacen el trabajo: paredes con acabado de piedra, madera cálida en pisos y paneles, y tapizados en tonos arena.",
+      "Cada ambiente tiene un detalle protagonista: la mesa redonda de mármol en la sala, la cabecera tapizada del dormitorio, el vestidor abierto con perfilería negra y el espejo orgánico con luz LED junto a los listones de madera.",
+    ],
+    highlights: [
+      "Sala con butacas curvas y mesa de mármol",
+      "Dormitorio con cabecera tapizada y pared texturizada",
+      "Vestidor abierto con perfilería negra y luz",
+      "Mueble de TV y tocador a medida",
+      "Espejo orgánico retroiluminado",
+    ],
+    service: "diseno-interiores-residencial",
+    images: [
+      P("qorner", 1, H[0], H[1], "Sala del departamento Qorner con mesa redonda de mármol y butacas curvas"),
+      P("qorner", 6, 1920, 2400, "Espejo orgánico retroiluminado junto a panel de listones de madera"),
+      P("qorner", 4, H[0], H[1], "Dormitorio con cabecera tapizada y pared con textura de piedra"),
+      P("qorner", 2, H[0], H[1], "Sala con vista a la ciudad, mesa de mármol y decoración en tonos neutros"),
+      P("qorner", 3, H[0], H[1], "Dormitorio con mueble de TV y tocador a medida en madera clara"),
+      P("qorner", 5, H[0], H[1], "Vestidor abierto con perfilería negra, espejo de cuerpo entero y luz"),
+    ],
+  },
+  {
+    slug: "house-line",
+    title: "Showroom House Line",
+    category: "comercial",
+    type: "Showroom de acabados",
+    summary:
+      "Un showroom de acabados en una gran nave industrial: ambientes de cocina y baño montados como en casa, con recorridos claros y mucha luz natural.",
+    description: [
+      "Para House Line diseñamos la exhibición de sus productos dentro de una nave de gran altura. La clave fue crear ambientes reconocibles —cocinas, baños, zonas de descanso— para que el cliente imagine cada acabado en su propia casa.",
+      "Los módulos blancos, el césped sintético y el mobiliario ordenan el recorrido sin bloquear la luz de las claraboyas ni la vista hacia el exterior.",
+    ],
+    highlights: [
+      "Ambientes de exhibición tipo hogar",
+      "Isla de cocina con barra y campana",
+      "Recorrido claro en nave industrial",
+      "Zona de atención y descanso para clientes",
+    ],
+    service: "diseno-locales-comerciales",
+    images: [
+      P("house-line", 1, H[0], H[1], "Showroom House Line con módulos de baño y cocina dentro de una nave industrial"),
+      P("house-line", 4, H[0], H[1], "Ambiente de cocina con isla y taburetes en el showroom House Line"),
+      P("house-line", 2, H[0], H[1], "Exhibición de muebles de baño y mesones en el showroom"),
+      P("house-line", 5, H[0], H[1], "Zona de atención al cliente con logo de House Line y césped sintético"),
+      P("house-line", 6, H[0], H[1], "Área de descanso junto a ventanales con vista a la ciudad"),
+      P("house-line", 3, H[0], H[1], "Recorrido del showroom con paneles de exhibición de acabados"),
+      P("house-line", 7, H[0], H[1], "Vista general de la nave con exhibición de acabados"),
+    ],
+  },
+  {
+    slug: "el-merkato",
+    title: "El Merkato",
+    category: "comercial",
+    type: "Supermercado",
+    summary:
+      "Un supermercado con identidad fuerte: muros verdes, rojo de marca y madera para que comprar se sienta fresco y cercano.",
+    description: [
+      "Diseñamos los interiores y la fachada de El Merkato combinando el rojo de la marca con jardines verticales y madera. El resultado es un espacio que se reconoce desde la calle y que guía al cliente desde el ingreso hasta las góndolas.",
+      "Las columnas revestidas en madera y verde, la iluminación puntual y la señalética integrada ordenan un local de gran escala sin que pierda calidez.",
+    ],
+    highlights: [
+      "Muros verdes y madera en columnas",
+      "Identidad de marca en rojo integrada al espacio",
+      "Fachada con vitrina y jardín vertical",
+      "Zona de cajas y exhibición de impulso",
+    ],
+    service: "diseno-locales-comerciales",
+    images: [
+      P("el-merkato", 1, H[0], H[1], "Muro rojo de marca con jardín vertical en el supermercado El Merkato"),
+      P("el-merkato", 2, H[0], H[1], "Zona de cajas de El Merkato con exhibidores y techo rojo"),
+      P("el-merkato", 3, H[0], H[1], "Ingreso al supermercado con jardín vertical y paneles de madera"),
+      P("el-merkato", 4, H[0], H[1], "Columnas revestidas en madera y verde entre las góndolas"),
+      P("el-merkato", 5, H[0], H[1], "Fachada de El Merkato con vitrina y jardinera"),
+    ],
+  },
+  {
+    slug: "centro-infantil",
+    title: "Centro Infantil",
+    category: "corporativo",
+    type: "Espacios exteriores de aprendizaje",
+    summary:
+      "Un patio de juego y aprendizaje en madera natural: plataformas sensoriales, circuitos y mobiliario pensado para que los niños exploren al aire libre.",
+    description: [
+      "Para un centro infantil diseñamos espacios exteriores inspirados en el juego libre y el contacto con la naturaleza. La madera natural, las texturas y los colores suaves invitan a explorar, trepar y descubrir.",
+      "Las plataformas sensoriales bajo los árboles, los circuitos con llantas recicladas y las mesas de actividades se integran al jardín sin perder seguridad ni orden.",
+    ],
+    highlights: [
+      "Plataforma sensorial de madera bajo los árboles",
+      "Circuito de juego con llantas recicladas",
+      "Mobiliario infantil en madera natural",
+      "Zonas de actividades al aire libre",
+    ],
+    service: "diseno-de-oficinas",
+    images: [
+      P("centro-infantil", 1, 1600, 1200, "Área de juego al aire libre con mobiliario infantil de madera"),
+      P("centro-infantil", 2, 1600, 1200, "Plataforma sensorial de madera con huerto y materiales naturales"),
+      P("centro-infantil", 3, 1600, 1200, "Deck de madera con cerca y actividades sensoriales bajo los árboles"),
+      P("centro-infantil", 4, 1200, 1600, "Rincón de juego con materiales naturales sobre el césped"),
+      P("centro-infantil", 5, 1200, 1600, "Columpio de madera y llantas recicladas pintadas"),
+      P("centro-infantil", 6, 1200, 1600, "Daniela y María José en el circuito de juego del centro infantil"),
+      P("centro-infantil", 7, 1200, 1600, "Las fundadoras de Visual en el área exterior del centro infantil"),
+    ],
+  },
+  {
+    slug: "residencia-la-herradura",
+    title: "Residencia La Herradura",
+    category: "residencial",
+    type: "Propuesta en renders 3D",
+    render: true,
+    summary:
+      "Propuesta 3D para una residencia: dormitorios con cabeceras iluminadas, estudio integrado, baños con espejos retroiluminados y madera en todos los ambientes.",
+    description: [
+      "Así presentamos un proyecto antes de construirlo: renders realistas de cada ambiente para que el cliente vea materiales, luz y mobiliario y tome decisiones con seguridad.",
+      "La propuesta combina tonos arena, madera natural y luz indirecta. Las cabeceras con iluminación, los muebles de TV con escritorio integrado y los baños con espejos retroiluminados crean una casa cálida y ordenada.",
+    ],
+    highlights: [
+      "Dormitorio principal con cabecera de listones e iluminación",
+      "Mueble de TV con escritorio integrado",
+      "Tocador con espejo retroiluminado",
+      "Baños con duchas de vidrio y grifería dorada",
+      "Renders realistas para aprobar antes de construir",
+    ],
+    service: "diseno-interiores-residencial",
+    images: [
+      P("residencia-la-herradura", 1, 1536, 1024, "Render 3D de dormitorio principal con cabecera de listones y luz cálida"),
+      P("residencia-la-herradura", 2, 1536, 1024, "Render 3D de dormitorio con cabecera redondeada y paleta neutra"),
+      P("residencia-la-herradura", 3, 1536, 1024, "Render 3D de tocador con espejo retroiluminado y mueble de TV curvo"),
+      P("residencia-la-herradura", 4, 1536, 1024, "Render 3D de estudio con mueble de TV y repisas iluminadas"),
+      P("residencia-la-herradura", 5, 1536, 1024, "Render 3D de mueble de TV con escritorio y panel de listones"),
+      P("residencia-la-herradura", 6, 1536, 1024, "Render 3D de baño con espejo retroiluminado y mueble de madera"),
+      P("residencia-la-herradura", 7, 1024, 1024, "Render 3D de baño con ducha de vidrio y espejo ovalado"),
+      P("residencia-la-herradura", 8, 1536, 1024, "Render 3D de estudio con escritorio y mueble de TV en madera"),
+      P("residencia-la-herradura", 9, 1536, 1024, "Render 3D de dormitorio con pared texturizada y clóset"),
+      P("residencia-la-herradura", 10, 1536, 1024, "Render 3D de muro decorativo con paneles de madera en arco"),
+    ],
+  },
+  {
+    slug: "stand-hove",
+    title: "Stand Hove",
+    category: "comercial",
+    type: "Stand de feria",
+    summary:
+      "Un stand de cocina y baño para feria: paneles negros, madera, jardín vertical y producto en exhibición, montado como un ambiente real.",
+    description: [
+      "Diseñamos el stand de Hove para exhibir cocinas, lavabos y grifería en un ambiente que el visitante pueda recorrer y tocar.",
+      "La combinación de negro mate, madera y verde crea un espacio contemporáneo que destaca dentro de la feria, con producto a la altura de la mano e iluminación puntual.",
+    ],
+    highlights: [
+      "Ambiente de cocina y baño recorrible",
+      "Jardín vertical y paneles de madera",
+      "Producto exhibido en uso real",
+      "Iluminación puntual para destacar acabados",
+    ],
+    service: "diseno-locales-comerciales",
+    images: [
+      P("stand-hove", 1, 1920, 1440, "Stand Hove con cocina, lavabos y jardín vertical en feria"),
+      P("stand-hove", 2, 1920, 1440, "Vista general del stand con mesa de bar y paneles negros"),
+      P("stand-hove", 3, H[0], H[1], "Detalle del stand con grifería y jardín vertical iluminado"),
+      P("stand-hove", 4, H[0], H[1], "Stand de cocina y baño con madera y paneles oscuros"),
+    ],
+  },
+  {
+    slug: "home-vega",
+    title: "Home Vega",
+    category: "comercial",
+    type: "Tienda de muebles y decoración",
+    summary:
+      "Una tienda de muebles y decoración organizada en ambientes: salas, comedores y una isla verde que invita a recorrer.",
+    description: [
+      "Diseñamos la exhibición de Home Vega en ambientes completos, para que el cliente vea cada pieza en contexto: una sala con chimenea y muro de leña, comedores y áreas de cocina.",
+      "Los muros de piedra y leña, el jardín vertical sobre la isla y el techo negro crean un espacio cálido y con carácter.",
+    ],
+    highlights: [
+      "Ambientes de exhibición completos",
+      "Muro de leña y piedra con chimenea",
+      "Isla de exhibición con jardín vertical",
+    ],
+    service: "diseno-locales-comerciales",
+    images: [
+      P("home-vega", 1, 1920, 1440, "Sala de exhibición con chimenea y muro de leña en Home Vega"),
+      P("home-vega", 2, H[0], H[1], "Isla de exhibición con jardín vertical y lavabos"),
+      P("home-vega", 3, 1920, 1440, "Zona de comedores y mesas en la tienda Home Vega"),
+    ],
+  },
+  {
+    slug: "casa-cunucbamba",
+    title: "Casa Cunucbamba",
+    category: "residencial",
+    type: "Propuesta en renders 3D",
+    render: true,
+    summary:
+      "Propuesta 3D para una casa con piscina interior, comedor de ladrillo visto y estudio con biblioteca, abierta a la luz natural.",
+    description: [
+      "Para esta casa propusimos un área social que gira en torno a una piscina interior bajo una gran claraboya, con comedor, cocina y zona de descanso integradas.",
+      "El ladrillo visto, la madera en el cielo raso y la estructura metálica negra dan un carácter contemporáneo y cálido. Los renders permitieron validar la propuesta antes de construir.",
+    ],
+    highlights: [
+      "Piscina interior con claraboya",
+      "Comedor y cocina con ladrillo visto",
+      "Estudio con biblioteca y ventanales",
+      "Renders realistas para aprobar antes de construir",
+    ],
+    service: "diseno-interiores-residencial",
+    images: [
+      P("casa-cunucbamba", 1, 1920, 1080, "Render 3D de comedor con ladrillo visto y estructura negra"),
+      P("casa-cunucbamba", 2, 1920, 1080, "Render 3D de piscina interior con claraboya"),
+      P("casa-cunucbamba", 3, 1920, 1080, "Render 3D de zona de descanso junto a la piscina"),
+      P("casa-cunucbamba", 4, 1920, 1080, "Render 3D de área social con comedor y escalera"),
+      P("casa-cunucbamba", 5, 1920, 1080, "Render 3D de estudio con biblioteca y ventanales"),
+    ],
+  },
+];
+
+const order = [
+  "casa-betania", "boutique-almara", "qorner", "consultorio-axxis", "house-line", "el-merkato",
+  "residencia-la-herradura", "centro-infantil", "stand-hove", "sala-muro-geometrico",
+  "camposanto", "banos-danes", "home-vega", "casa-cunucbamba",
+];
+
+export const caseStudies: CaseStudy[] = order
+  .map((slug) => [...baseCases, ...newCases].find((c) => c.slug === slug))
+  .filter((c): c is CaseStudy => Boolean(c));
 
 export const categoryLabel: Record<CaseCategory, string> = {
   residencial: "Residencial",

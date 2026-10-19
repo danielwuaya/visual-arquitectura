@@ -30,6 +30,9 @@ export const projects: Project[] = [
   { src: "/images/category-corporativo.jpg", title: "Oficina con luz cenital", alt: "Oficina con listones de madera, luz cenital y escritorio a medida", category: "corporativo", ratio: 462 / 461 },
   { src: "/images/project-retail-1.jpg", title: "Tienda deportiva", alt: "Local comercial de ropa deportiva con counter de atención a medida", category: "corporativo", ratio: 983 / 737 },
   { src: "/images/project-bar.jpg", title: "Showroom con barra", alt: "Espacio comercial con barra alta, exhibición de acabados y luz lineal", category: "corporativo", ratio: 553 / 737 },
+  { src: "/images/proyectos/varios/03.jpg", title: "Sala de estar", alt: "Sala de estar con sofá en tonos arena, cuadro colorido y luz indirecta", category: "residencial", ratio: 1800 / 2400 },
+  { src: "/images/proyectos/varios/01.jpg", title: "Estudio a medida", alt: "Escritorio a medida con mesón de piedra y gabinetes de madera", category: "residencial", ratio: 1440 / 1920 },
+  { src: "/images/proyectos/varios/02.jpg", title: "Baño social", alt: "Baño social con papel tapiz geométrico y luz cálida", category: "residencial", ratio: 1440 / 1920 },
   { src: "/images/project-chapel.jpg", title: "Capilla", alt: "Diseño interior de capilla con paneles verticales y altar iluminado", category: "corporativo", ratio: 1308 / 737 },
 ];
 

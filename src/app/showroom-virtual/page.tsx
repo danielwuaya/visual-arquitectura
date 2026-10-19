@@ -20,9 +20,19 @@ const crumbs = [
   { name: "Showroom digital", path: "/showroom-virtual" },
 ];
 
-const rooms: ShowroomRoom[] = caseStudies
-  .filter((c) => showroomSlides[c.slug]?.length)
-  .map((c) => ({ slug: c.slug, title: c.title, type: c.type, slides: showroomSlides[c.slug] }));
+const shortCaption = (alt: string) => {
+  const t = alt.replace(/^Render 3D de /, "").split(/,| con | junto | en (?=[A-Z])/)[0].trim();
+  return t.charAt(0).toUpperCase() + t.slice(1);
+};
+
+const rooms: ShowroomRoom[] = caseStudies.map((c) => ({
+  slug: c.slug,
+  title: c.title,
+  type: c.render ? "Render 3D" : c.type,
+  slides:
+    showroomSlides[c.slug] ??
+    c.images.map((i) => ({ src: i.src, w: i.w, h: i.h, caption: shortCaption(i.alt) })),
+}));
 
 const totalPhotos = rooms.reduce((n, r) => n + r.slides.length, 0);
 

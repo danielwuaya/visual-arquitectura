@@ -26,6 +26,7 @@ export default function CaseCard({
         </span>
         <span className="absolute left-5 top-5 rounded-full bg-ivory/90 px-3 py-1 text-[0.68rem] uppercase tracking-[0.18em] text-ink backdrop-blur">
           {categoryLabel[c.category]}
+          {c.render && " · Render 3D"}
         </span>
       </div>
       <div className="mt-5 flex items-baseline justify-between gap-4">

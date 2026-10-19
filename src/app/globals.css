@@ -270,6 +270,8 @@ p { text-wrap: pretty; }
 .sr-in { animation: sr-in 1.3s var(--ease-out) both; }
 .sr-zoom > img { animation: sr-zoom 9s linear both; }
 .sr-fade { animation: lb-in 1s var(--ease-out) both; }
+@keyframes sr-out { from { opacity: 1; } to { opacity: 0; } }
+.sr-out { animation: sr-out 1.2s var(--ease-out) 0.15s forwards; }
 .sr-text { animation: fade-up 0.9s var(--ease-out) both; }
 .sr-progress { animation: sr-progress linear forwards; }
 .sr-btn {

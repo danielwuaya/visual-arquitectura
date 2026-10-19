@@ -138,7 +138,7 @@ export default function DigitalShowroom({ rooms }: { rooms: ShowroomRoom[] }) {
 
         {/* Foto anterior (queda debajo mientras entra la nueva) */}
         {prevSrc && prevSrc !== current.src && (
-          <div className="absolute inset-0">
+          <div key={`prev-${tick}`} className="sr-out absolute inset-0">
             <Image src={prevSrc} alt="" fill sizes="100vw" quality={90} className={fill ? "object-cover" : "object-contain"} />
           </div>
         )}
