@@ -17,8 +17,7 @@ import { NextResponse } from "next/server";
 // normalmente y solo registra el mensaje en los logs (no se pierde nada).
 
 async function sendWhatsAppNotification(fields: {
-  firstName?: string;
-  lastName?: string;
+  name?: string;
   phone?: string;
   projectType?: string;
   message?: string;
@@ -37,7 +36,7 @@ async function sendWhatsAppNotification(fields: {
   const templateName = process.env.WHATSAPP_TEMPLATE_NAME || "nuevo_contacto_web";
   const templateLang = process.env.WHATSAPP_TEMPLATE_LANG || "es";
 
-  const nombre = [fields.firstName, fields.lastName].filter(Boolean).join(" ") || "Sin nombre";
+  const nombre = fields.name || "Sin nombre";
   const telefono = fields.phone || "No indicado";
   const tipoProyecto = fields.projectType || "No indicado";
   const mensaje = fields.message || "Sin mensaje";
@@ -79,29 +78,46 @@ async function sendWhatsAppNotification(fields: {
   }
 }
 
+const clean = (v: unknown, max = 1000) =>
+  typeof v === "string" ? v.trim().slice(0, max) : "";
+
 export async function POST(request: Request) {
   try {
-    const data = await request.json();
-    const { firstName, lastName, email, phone, projectType, message } = data ?? {};
+    const data = (await request.json()) ?? {};
 
-    if (!email) {
-      return NextResponse.json({ error: "Email requerido" }, { status: 400 });
+    // Campo trampa: si un bot lo llena, respondemos OK sin procesar nada.
+    if (clean(data.website)) return NextResponse.json({ ok: true });
+
+    const lead = {
+      name: clean(data.name, 120),
+      phone: clean(data.phone, 40),
+      email: clean(data.email, 160),
+      zone: clean(data.zone, 60),
+      projectType: clean(data.projectType, 60),
+      message: clean(data.message, 2000),
+      page: clean(data.page, 200),
+    };
+
+    if (!lead.name || (!lead.phone && !lead.email)) {
+      return NextResponse.json(
+        { error: "Nombre y un teléfono o email son requeridos" },
+        { status: 400 }
+      );
     }
 
-    console.log("Nuevo mensaje de contacto:", {
-      firstName,
-      lastName,
-      email,
-      phone,
-      projectType,
-      message,
-      date: new Date().toISOString(),
-    });
+    console.log("Nuevo lead desde la web:", { ...lead, date: new Date().toISOString() });
 
     // No dejamos que un fallo en WhatsApp rompa el envío del formulario:
     // el mensaje ya quedó registrado en los logs de todas formas.
     try {
-      await sendWhatsAppNotification({ firstName, lastName, phone, projectType, message });
+      await sendWhatsAppNotification({
+        name: lead.name,
+        phone: lead.phone || "No indicado",
+        projectType: [lead.projectType, lead.zone].filter(Boolean).join(" · "),
+        message: [lead.message || "Sin mensaje", lead.email && `Email: ${lead.email}`]
+          .filter(Boolean)
+          .join(" — "),
+      });
     } catch (err) {
       console.error("Error al notificar por WhatsApp:", err);
     }
@@ -115,8 +131,8 @@ export async function POST(request: Request) {
     // await resend.emails.send({
     //   from: "Visual Web <onboarding@resend.dev>",
     //   to: "Visual.disenoyarquitectura@gmail.com",
-    //   subject: `Nuevo contacto de ${firstName ?? "sitio web"}`,
-    //   text: `${firstName} ${lastName}\n${email}\n${phone}\n\n${message}`,
+    //   subject: `Nuevo lead web: ${lead.name} (${lead.projectType})`,
+    //   text: Object.entries(lead).map(([k, v]) => `${k}: ${v}`).join("\n"),
     // });
 
     return NextResponse.json({ ok: true });

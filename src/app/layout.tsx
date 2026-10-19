@@ -1,71 +1,63 @@
-import type { Metadata } from "next";
-import { Marcellus, Jost } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
-import { contact } from "@/lib/site";
+import Experience from "@/components/Experience";
+import Analytics from "@/components/Analytics";
+import JsonLd from "@/components/JsonLd";
+import { siteName, siteUrl } from "@/lib/site";
+import { localBusinessSchema, websiteSchema } from "@/lib/seo";
 
-const display = Marcellus({
-  variable: "--font-display",
-  subsets: ["latin"],
+// Fuentes alojadas en el propio sitio: más rápidas y sin depender de Google.
+const marcellus = localFont({
+  src: "../fonts/marcellus-latin-400-normal.woff2",
+  variable: "--font-marcellus",
   weight: "400",
+  display: "swap",
 });
 
-const body = Jost({
-  variable: "--font-body",
-  subsets: ["latin"],
-  weight: ["300", "400", "500"],
+const jost = localFont({
+  src: "../fonts/jost-latin-wght-normal.woff2",
+  variable: "--font-jost",
+  weight: "300 600",
+  display: "swap",
 });
 
-const siteUrl = "https://www.visualarquitecturainterior.com";
+const cormorant = localFont({
+  src: [
+    { path: "../fonts/cormorant-garamond-latin-400-italic.woff2", weight: "400", style: "italic" },
+    { path: "../fonts/cormorant-garamond-latin-500-italic.woff2", weight: "500", style: "italic" },
+  ],
+  variable: "--font-cormorant",
+  display: "swap",
+});
 
-const defaultTitle =
-  "Diseño de Interiores en Quito | Visual Arquitectura Interior";
+const defaultTitle = "Diseño de Interiores en Quito y Cumbayá | Visual";
 const defaultDescription =
-  "Estudio de diseño de interiores y arquitectura interior en Quito y Cumbayá. Diseñamos hogares, oficinas y espacios comerciales con armonía, estilo y bienestar. Agenda tu asesoría.";
-const keywords = [
-  "diseño de interiores Quito",
-  "diseñadores de interiores Quito",
-  "arquitectura interior Ecuador",
-  "estudio de diseño de interiores",
-  "decoración de interiores Quito",
-  "remodelación de interiores Quito",
-  "diseño de interiores Cumbayá",
-  "diseño de oficinas Quito",
-  "diseño de espacios comerciales",
-  "interiorismo Ecuador",
-];
+  "Estudio de diseño de interiores en Cumbayá, Quito. Diseñamos casas, departamentos, oficinas y locales comerciales con armonía, estilo y bienestar. Agenda tu asesoría.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: defaultTitle,
-    template: "%s | Visual Diseño de Interiores",
+    template: "%s | Visual",
   },
   description: defaultDescription,
-  keywords,
-  authors: [{ name: "Visual Diseño de Interiores" }],
-  creator: "Visual Diseño de Interiores",
-  publisher: "Visual Diseño de Interiores",
-  alternates: {
-    canonical: siteUrl,
-  },
+  applicationName: siteName,
+  authors: [{ name: siteName, url: siteUrl }],
+  creator: siteName,
+  publisher: siteName,
+  formatDetection: { telephone: false },
   openGraph: {
     title: defaultTitle,
     description: defaultDescription,
     url: siteUrl,
-    siteName: "Visual Diseño de Interiores",
+    siteName,
     locale: "es_EC",
     type: "website",
-    images: [
-      {
-        url: "/images/home-hero.jpg",
-        width: 1311,
-        height: 737,
-        alt: "Diseño de interiores por Visual, Quito",
-      },
-    ],
+    images: [{ url: "/images/home-hero.jpg", width: 1311, height: 737, alt: "Diseño de interiores por Visual en Quito y Cumbayá" }],
   },
   twitter: {
     card: "summary_large_image",
@@ -76,48 +68,37 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-    },
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  },
+  other: {
+    "geo.region": "EC-P",
+    "geo.placename": "Cumbayá, Quito",
   },
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "InteriorDesignFirm",
-  name: "Visual Diseño de Interiores",
-  image: `${siteUrl}/images/home-hero.jpg`,
-  url: siteUrl,
-  telephone: contact.phones[0],
-  email: contact.email,
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: contact.address,
-    addressLocality: "Cumbayá, Quito",
-    addressCountry: "EC",
-  },
-  areaServed: "Quito, Ecuador",
-  sameAs: [contact.instagram, contact.tiktok, contact.linkedin],
-  description: defaultDescription,
+export const viewport: Viewport = {
+  themeColor: "#f7f3ee",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="es"
-      className={`${display.variable} ${body.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+    <html lang="es-EC" suppressHydrationWarning className={`${marcellus.variable} ${jost.variable} ${cormorant.variable}`}>
+      <body className="min-h-screen">
+        {/* Activa las animaciones solo si hay JavaScript (el contenido nunca queda oculto) */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+        <JsonLd data={[localBusinessSchema(), websiteSchema()]} />
+        <a href="#contenido" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-ink focus:px-4 focus:py-2 focus:text-ivory">
+          Saltar al contenido
+        </a>
         <Header />
-        <main className="flex-1">{children}</main>
+        <main id="contenido">{children}</main>
         <Footer />
         <WhatsAppButton />
+        <Experience />
+        <Analytics />
       </body>
     </html>
   );

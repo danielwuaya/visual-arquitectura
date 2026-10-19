@@ -1,6 +1,6 @@
 # Visual — Diseño de Interiores
 
-Sitio web reconstruido en código (Next.js 15 + Tailwind CSS 4) a partir del
+Sitio web reconstruido en código (Next.js 16 + Tailwind CSS 4) a partir del
 sitio original en Wix (visualarquitecturainterior.com), con el mismo
 contenido, fotografías y estilo visual, pero con control total del código
 para SEO, rendimiento y hosting.
@@ -139,24 +139,44 @@ y agrega `visualarquitecturainterior.com` (o el dominio que prefieras).
 Vercel te da los registros DNS exactos para apuntar el dominio, ya sea
 que lo compres en Vercel o lo tengas en otro proveedor.
 
-## SEO
+## SEO local (Quito / Cumbayá)
 
-El proyecto ya incluye:
+- Cada página tiene su propio `canonical`, título y descripción (helper `pageMetadata` en `src/lib/seo.ts`).
+- Páginas que posicionan búsquedas concretas:
+  - `/` → "diseño de interiores Quito / Cumbayá"
+  - `/servicios/diseno-interiores-residencial`, `/servicios/diseno-de-oficinas`, `/servicios/diseno-locales-comerciales`
+  - `/diseno-de-interiores-cumbaya` → "diseño de interiores Cumbayá / Tumbaco"
+- Datos estructurados (schema.org): negocio local, servicios, preguntas frecuentes, migas de pan y galería.
+- `sitemap.xml` y `robots.txt` automáticos.
+- Textos, servicios, preguntas frecuentes y proyectos se editan en `src/lib/content.ts`; contacto y zonas en `src/lib/site.ts`.
 
-- Metadata (title, description, Open Graph) por página, editable en cada
-  `page.tsx` y en `src/app/layout.tsx`
-- `sitemap.xml` generado automáticamente (`src/app/sitemap.ts`)
-- `robots.txt` generado automáticamente (`src/app/robots.ts`)
-- Imágenes optimizadas automáticamente por Next.js (`next/image`)
+### Después de publicar
 
-Para verificación de Google Search Console, Meta Business, etc., agrega
-las etiquetas `meta` correspondientes en `src/app/layout.tsx` dentro de
-`metadata.verification`.
+1. Da de alta el sitio en **Google Search Console** y envía `/sitemap.xml`.
+   Pon el código de verificación en la variable `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION`.
+2. En el **Perfil de Empresa de Google** (Google Maps) usa exactamente el mismo
+   nombre, dirección y teléfono que el sitio, y enlaza a la web. Es lo que más
+   pesa para aparecer en el mapa al buscar "diseño de interiores Cumbayá".
+
+## Medición de conversiones
+
+El sitio registra eventos `generate_lead` (formulario) y `whatsapp_click`,
+`phone_click`, `email_click` (con la ubicación del botón). Se activan al
+definir en Vercel:
+
+| Variable | Valor |
+|---|---|
+| `NEXT_PUBLIC_GA_ID` | ID de Google Analytics 4 (`G-XXXXXXX`) |
+| `NEXT_PUBLIC_META_PIXEL_ID` | ID del Meta Pixel (anuncios de Facebook/Instagram) |
+
+## Animaciones
+
+- Transición de cortina entre páginas y scroll suave: `src/components/Experience.tsx`
+- Revelados al hacer scroll: atributo `data-reveal="up | img | mask | lines"` (estilos en `globals.css`)
+- Todo se desactiva automáticamente si el visitante tiene activado "reducir movimiento".
 
 ## Nota sobre fuentes
 
-El sitio original usa fuentes con licencia de Wix (Florania y DIN Next)
-que no se pueden exportar. Este proyecto usa **Marcellus** (para títulos)
-y **Jost** (para texto), dos fuentes gratuitas de Google Fonts con un
-espíritu visual muy cercano al original. Puedes cambiarlas en
-`src/app/layout.tsx`.
+Se usan **Marcellus** (títulos), **Jost** (texto) y **Cormorant Garamond
+itálica** (acentos), alojadas en `src/fonts/` para cargar más rápido y sin
+depender de Google Fonts. Se cambian en `src/app/layout.tsx`.

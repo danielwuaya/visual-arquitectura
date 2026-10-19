@@ -1,110 +1,82 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import PageHero from "@/components/PageHero";
-import {
-  CalendarIcon,
-  SwatchIcon,
-  CubeIcon,
-  CoinsIcon,
-  ExecutionIcon,
-} from "@/components/StepIcons";
+import { homeFaqs, services } from "@/lib/content";
+import { breadcrumbSchema, faqSchema, pageMetadata, serviceSchema } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
+import { ArrowIcon, delay } from "@/components/ui";
+import { ContactSection, FaqSection, PageHeader, ProcessSection } from "@/components/sections";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Servicios de Diseño de Interiores en Quito",
   description:
-    "Diseño de interiores residencial, corporativo y comercial en Quito. Planificamos y acompañamos cada paso para crear espacios funcionales, estéticos y llenos de bienestar.",
-  keywords: [
-    "servicios de diseño de interiores Quito",
-    "diseño residencial Quito",
-    "diseño de oficinas corporativas",
-    "diseño de locales comerciales Ecuador",
-  ],
-  openGraph: {
-    title: "Servicios de Diseño de Interiores | Visual",
-    description:
-      "Diseño de interiores residencial, corporativo y comercial en Quito.",
-    images: [{ url: "/images/services-hero.jpg" }],
-  },
-};
+    "Diseño de interiores residencial, de oficinas y de locales comerciales en Quito, Cumbayá y Tumbaco. Planificación, diseño, renders, presupuesto y ejecución de obra.",
+  path: "/servicios",
+  image: "/images/services-hero.jpg",
+});
 
-const steps = [
-  { icon: CalendarIcon, label: "Agenda tu visita" },
-  { icon: SwatchIcon, label: "Planificación" },
-  { icon: CubeIcon, label: "Diseño" },
-  { icon: CoinsIcon, label: "Presupuesto" },
-  { icon: ExecutionIcon, label: "Ejecución" },
-];
-
-const categories = [
-  {
-    title: "Diseño Residencial",
-    text: "En cada proyecto residencial, creamos espacios que equilibran estética, funcionalidad y bienestar.",
-    image: "/images/project-living-kitchen.jpg",
-  },
-  {
-    title: "Diseño Corporativo",
-    text: "Creamos entornos laborales modernos, funcionales y estéticamente coherentes con la identidad de cada empresa.",
-    image: "/images/category-corporativo.jpg",
-  },
-  {
-    title: "Diseño Comercial",
-    text: "Espacios comerciales y retail pensados para atraer, conectar y reflejar la identidad de cada marca.",
-    image: "/images/category-comercial.jpg",
-  },
+const crumbs = [
+  { name: "Inicio", path: "/" },
+  { name: "Servicios", path: "/servicios" },
 ];
 
 export default function Servicios() {
   return (
     <>
-      <PageHero
-        image="/images/services-hero.jpg"
-        title="Servicios"
-        subtitle="Diseñamos, planificamos y acompañamos cada paso para crear espacios funcionales y estéticos"
+      <JsonLd
+        data={[
+          breadcrumbSchema(crumbs),
+          faqSchema(homeFaqs.slice(1)),
+          ...services.map((s) =>
+            serviceSchema({ name: s.name, description: s.metaDescription, path: `/servicios/${s.slug}`, image: s.image })
+          ),
+        ]}
+      />
+      <PageHeader
+        breadcrumbs={crumbs}
+        eyebrow="Servicios"
+        title={["Diseño de interiores", <span key="a" className="accent text-taupe-deep">para cada espacio</span>]}
+        intro="Diseñamos, planificamos y acompañamos cada paso para crear espacios funcionales y estéticos en Quito, Cumbayá y Tumbaco."
       />
 
-      <section className="bg-taupe px-6 py-16 text-white sm:px-16 lg:py-20">
-        <h2 className="text-center font-display text-3xl">Nuestro Procedimiento</h2>
-        <div className="mx-auto mt-12 grid max-w-5xl grid-cols-2 gap-10 sm:grid-cols-5">
-          {steps.map(({ icon: Icon, label }) => (
-            <div key={label} className="flex flex-col items-center text-center">
-              <Icon className="h-10 w-10" />
-              <p className="mt-3 font-sans text-sm">{label}</p>
-            </div>
+      <section className="bg-ivory">
+        <div className="mx-auto max-w-[1400px] space-y-24 px-5 py-20 sm:px-8 lg:space-y-36 lg:px-12 lg:py-28">
+          {services.map((s, i) => (
+            <article key={s.slug} className="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-16">
+              <Link
+                href={`/servicios/${s.slug}`}
+                className={`zoom relative block aspect-[4/5] overflow-hidden bg-sand sm:aspect-[4/3] lg:col-span-7 ${i % 2 ? "lg:order-2" : ""}`}
+                data-reveal="img"
+                tabIndex={-1}
+                aria-hidden="true"
+              >
+                <Image src={s.image} alt={s.imageAlt} fill sizes="(min-width: 1024px) 58vw, 100vw" className="object-cover" />
+              </Link>
+              <div className="lg:col-span-5">
+                <p className="eyebrow" data-reveal="up">0{i + 1} — {s.name}</p>
+                <h2 className="mt-5 font-display text-[clamp(2rem,3.6vw,3rem)] leading-[1.08]" data-reveal="up" style={delay(0.05)}>
+                  <Link href={`/servicios/${s.slug}`} className="hover:text-taupe-deep">{s.h1}</Link>
+                </h2>
+                <p className="mt-5 leading-relaxed" data-reveal="up" style={delay(0.1)}>{s.intro}</p>
+                <ul className="mt-6 grid grid-cols-2 gap-x-6 gap-y-2 text-sm" data-reveal="up" style={delay(0.15)}>
+                  {s.includes.map((inc) => (
+                    <li key={inc.title} className="flex items-center gap-2">
+                      <span className="h-1 w-1 rounded-full bg-taupe-deep" aria-hidden="true" />
+                      {inc.title}
+                    </li>
+                  ))}
+                </ul>
+                <Link href={`/servicios/${s.slug}`} className="btn btn-outline mt-8" data-reveal="up" style={delay(0.2)}>
+                  Ver {s.name.toLowerCase()} <ArrowIcon />
+                </Link>
+              </div>
+            </article>
           ))}
         </div>
       </section>
 
-      <section className="px-6 py-16 sm:px-16 lg:py-24">
-        <h2 className="text-center font-display text-3xl">Categorías de diseño</h2>
-        <div className="mx-auto mt-12 grid max-w-6xl gap-8 sm:grid-cols-3">
-          {categories.map((c) => (
-            <div key={c.title} className="bg-[#f0ece5]">
-              <div className="relative aspect-[4/3]">
-                <Image
-                  src={c.image}
-                  alt={c.title}
-                  fill
-                  className="object-cover"
-                  sizes="(min-width: 640px) 33vw, 100vw"
-                />
-              </div>
-              <div className="p-6 text-center">
-                <h3 className="font-display text-xl">{c.title}</h3>
-                <p className="mt-3 font-sans text-sm leading-relaxed text-body">
-                  {c.text}
-                </p>
-                <Link
-                  href="#contacto"
-                  className="mt-5 inline-block bg-taupe px-6 py-2.5 font-sans text-xs uppercase tracking-wide-nav text-white transition-colors hover:bg-taupe-dark"
-                >
-                  Escríbenos
-                </Link>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      <ProcessSection />
+      <FaqSection faqs={homeFaqs.slice(1)} />
+      <ContactSection placement="servicios" />
     </>
   );
 }

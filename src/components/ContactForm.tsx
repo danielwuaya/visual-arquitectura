@@ -1,10 +1,15 @@
 "use client";
 
 import { useId, useState, type FormEvent } from "react";
+import { contact, waLink } from "@/lib/site";
+import { track } from "@/lib/track";
+import { WhatsAppIcon } from "@/components/icons";
+import { ArrowIcon } from "@/components/ui";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
-const projectTypes = ["Residencial", "Corporativo", "Comercial", "Otro"];
+const projectTypes = ["Casa o departamento", "Oficina", "Local comercial", "Airbnb", "Otro"];
+const zones = ["Cumbayá", "Tumbaco", "Quito", "Nayón / Puembo", "Otra ciudad"];
 
 function Field({
   id,
@@ -12,95 +17,83 @@ function Field({
   type = "text",
   required,
   textarea,
+  autoComplete,
+  inputMode,
 }: {
   id: string;
   label: string;
   type?: string;
   required?: boolean;
   textarea?: boolean;
+  autoComplete?: string;
+  inputMode?: "tel" | "email" | "text";
 }) {
-  const commonProps = {
-    id,
-    name: id,
-    required,
-    placeholder: " ",
-    className:
-      "peer w-full border-0 border-b border-white/30 bg-transparent px-0 py-3 text-white outline-none transition-colors placeholder-shown:border-white/30 focus:border-taupe",
-  };
-
+  const props = { id, name: id, required, placeholder: " ", autoComplete, className: "field peer" };
   return (
     <div className="relative">
-      {textarea ? (
-        <textarea rows={4} {...commonProps} />
-      ) : (
-        <input type={type} {...commonProps} />
-      )}
+      {textarea ? <textarea rows={3} {...props} /> : <input type={type} inputMode={inputMode} {...props} />}
       <label
         htmlFor={id}
-        className="pointer-events-none absolute left-0 top-3 font-sans text-sm text-white/60 transition-all duration-200 ease-out peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm peer-placeholder-shown:text-white/60 peer-focus:-top-3 peer-focus:text-xs peer-focus:text-taupe peer-not-placeholder-shown:-top-3 peer-not-placeholder-shown:text-xs peer-not-placeholder-shown:text-white/80"
+        className="pointer-events-none absolute left-0 top-4 text-[0.95rem] text-body/80 transition-all duration-300 peer-focus:top-0 peer-focus:text-[0.68rem] peer-focus:uppercase peer-focus:tracking-[0.18em] peer-focus:text-taupe-deep peer-[:not(:placeholder-shown)]:top-0 peer-[:not(:placeholder-shown)]:text-[0.68rem] peer-[:not(:placeholder-shown)]:uppercase peer-[:not(:placeholder-shown)]:tracking-[0.18em]"
       >
         {label}
-        {required && <span className="text-taupe"> *</span>}
+        {required ? <span className="text-taupe-deep"> *</span> : <span className="text-body/50"> (opcional)</span>}
       </label>
-      <span className="pointer-events-none absolute bottom-0 left-0 h-px w-0 bg-taupe transition-all duration-300 ease-out peer-focus:w-full" />
     </div>
   );
 }
 
-export default function ContactForm() {
+export default function ContactForm({ placement = "form" }: { placement?: string }) {
   const [status, setStatus] = useState<Status>("idle");
-  const [projectType, setProjectType] = useState<string>("Residencial");
-  const formId = useId();
+  const [projectType, setProjectType] = useState(projectTypes[0]);
+  const [lead, setLead] = useState<{ name: string; zone: string; message: string } | null>(null);
+  const uid = useId();
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setStatus("sending");
     const form = e.currentTarget;
-    const data = {
-      ...Object.fromEntries(new FormData(form).entries()),
-      projectType,
-    };
-
+    const fd = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
+    setStatus("sending");
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...fd, projectType, page: window.location.pathname }),
       });
       if (!res.ok) throw new Error("request failed");
+      track("generate_lead", { placement, project_type: projectType, zone: fd.zone });
+      setLead({ name: fd.name, zone: fd.zone, message: fd.message });
       setStatus("sent");
       form.reset();
-      setProjectType("Residencial");
     } catch {
       setStatus("error");
     }
   }
 
   if (status === "sent") {
+    const waMsg = `Hola Visual, soy ${lead?.name ?? ""}. Acabo de enviar el formulario de la web: proyecto ${projectType.toLowerCase()}${lead?.zone ? ` en ${lead.zone}` : ""}. ¿Coordinamos la asesoría?`;
     return (
-      <div className="flex h-full min-h-[320px] flex-col items-center justify-center border border-white/15 px-6 py-16 text-center">
-        <span className="flex h-14 w-14 items-center justify-center rounded-full border border-taupe text-taupe">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.6"
-            className="h-6 w-6"
-            aria-hidden="true"
-          >
+      <div className="flex min-h-[420px] flex-col items-start justify-center" role="status">
+        <span className="flex h-14 w-14 items-center justify-center rounded-full border border-taupe-deep text-taupe-deep">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="h-6 w-6" aria-hidden="true">
             <path d="M5 12.5 10 17 19 7" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </span>
-        <p className="mt-6 font-display text-xl text-white">¡Mensaje enviado!</p>
-        <p className="mt-2 max-w-xs font-sans text-sm text-white/60">
-          Gracias por escribirnos. Te responderemos muy pronto para agendar tu
-          asesoría.
+        <p className="mt-8 font-display text-3xl text-ink">¡Gracias{lead?.name ? `, ${lead.name.split(" ")[0]}` : ""}!</p>
+        <p className="mt-3 max-w-sm leading-relaxed">
+          Recibimos tu mensaje. Te contactaremos muy pronto para agendar tu asesoría.
+          Si prefieres avanzar ahora mismo, escríbenos por WhatsApp.
         </p>
-        <button
-          type="button"
-          onClick={() => setStatus("idle")}
-          className="mt-8 font-sans text-xs uppercase tracking-wide-nav text-taupe underline underline-offset-4"
+        <a
+          href={waLink(waMsg)}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => track("whatsapp_click", { placement: "form-success" })}
+          className="btn btn-wa mt-8"
         >
+          <WhatsAppIcon className="h-4 w-4" /> Continuar por WhatsApp
+        </a>
+        <button type="button" onClick={() => setStatus("idle")} className="link-u-on mt-6 text-xs uppercase tracking-[0.18em]">
           Enviar otro mensaje
         </button>
       </div>
@@ -108,26 +101,18 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="font-sans text-sm">
-      <p className="font-display text-2xl text-white">Cuéntanos tu proyecto</p>
-      <p className="mt-2 text-sm text-white/60">
-        Completa el formulario y te contactamos para agendar tu asesoría de
-        diseño de interiores.
-      </p>
-
-      <fieldset className="mt-8">
-        <legend className="mb-3 text-xs uppercase tracking-wide-nav text-white/60">
-          Tipo de proyecto
-        </legend>
+    <form onSubmit={handleSubmit} className="text-sm" noValidate={false}>
+      <fieldset>
+        <legend className="eyebrow mb-4">¿Qué quieres diseñar?</legend>
         <div className="flex flex-wrap gap-2">
           {projectTypes.map((option) => {
-            const inputId = `${formId}-${option}`;
+            const id = `${uid}-${option}`;
             const active = projectType === option;
             return (
               <div key={option}>
                 <input
                   type="radio"
-                  id={inputId}
+                  id={id}
                   name="projectTypeRadio"
                   value={option}
                   checked={active}
@@ -135,11 +120,11 @@ export default function ContactForm() {
                   className="peer sr-only"
                 />
                 <label
-                  htmlFor={inputId}
-                  className={`block cursor-pointer border px-4 py-2 text-xs uppercase tracking-wide-nav transition-colors ${
+                  htmlFor={id}
+                  className={`block cursor-pointer rounded-full border px-4 py-2.5 text-[0.8rem] transition-all duration-300 peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-taupe-deep ${
                     active
-                      ? "border-taupe bg-taupe text-white"
-                      : "border-white/30 text-white/70 hover:border-white/60"
+                      ? "border-ink bg-ink text-ivory"
+                      : "border-ink/20 text-body hover:border-ink/60"
                   }`}
                 >
                   {option}
@@ -150,45 +135,54 @@ export default function ContactForm() {
         </div>
       </fieldset>
 
-      <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-8">
-        <Field id="firstName" label="Nombre" required />
-        <Field id="lastName" label="Apellido" />
-        <div className="col-span-2">
-          <Field id="email" label="Email" type="email" required />
+      <div className="mt-8 grid gap-x-8 gap-y-7 sm:grid-cols-2">
+        <Field id="name" label="Nombre" required autoComplete="name" />
+        <Field id="phone" label="WhatsApp o teléfono" type="tel" inputMode="tel" required autoComplete="tel" />
+        <Field id="email" label="Email" type="email" inputMode="email" autoComplete="email" />
+        <div className="relative">
+          <select id="zone" name="zone" defaultValue="" className="field appearance-none pr-8 text-[0.95rem]">
+            <option value="" disabled>
+              Zona del proyecto
+            </option>
+            {zones.map((z) => (
+              <option key={z} value={z}>
+                {z}
+              </option>
+            ))}
+          </select>
+          <svg viewBox="0 0 24 24" className="pointer-events-none absolute right-0 top-5 h-4 w-4 text-body" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true">
+            <path d="m6 9 6 6 6-6" />
+          </svg>
+          <label htmlFor="zone" className="sr-only">Zona del proyecto</label>
         </div>
-        <div className="col-span-2">
-          <Field id="phone" label="Teléfono" type="tel" />
-        </div>
-        <div className="col-span-2">
+        <div className="sm:col-span-2">
           <Field id="message" label="Cuéntanos sobre tu espacio" textarea />
         </div>
       </div>
 
-      <button
-        type="submit"
-        disabled={status === "sending"}
-        className="group mt-10 flex w-full items-center justify-center gap-3 border border-taupe bg-transparent py-3.5 text-xs uppercase tracking-wide-nav text-white transition-colors hover:bg-taupe disabled:opacity-60"
-      >
-        {status === "sending" ? "Enviando..." : "Enviar mensaje"}
-        {status !== "sending" && (
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.6"
-            className="h-4 w-4 transition-transform group-hover:translate-x-1"
-            aria-hidden="true"
-          >
-            <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        )}
-      </button>
+      {/* Campo trampa anti-spam: invisible para personas */}
+      <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+        <label htmlFor={`${uid}-web`}>No llenar</label>
+        <input id={`${uid}-web`} name="website" tabIndex={-1} autoComplete="off" />
+      </div>
+
+      <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <button type="submit" disabled={status === "sending"} className="btn btn-primary disabled:opacity-60">
+          {status === "sending" ? "Enviando…" : "Quiero mi asesoría"}
+          {status !== "sending" && <ArrowIcon />}
+        </button>
+        <p className="text-xs text-body/70">Sin compromiso. Tus datos solo se usan para contactarte.</p>
+      </div>
 
       {status === "error" && (
-        <p className="mt-4 text-xs text-red-300">
-          Hubo un problema al enviar tu mensaje. Escríbenos directo a{" "}
-          <a className="underline" href="mailto:Visual.disenoyarquitectura@gmail.com">
-            Visual.disenoyarquitectura@gmail.com
+        <p className="mt-5 text-sm text-red-700" role="alert">
+          No pudimos enviar tu mensaje. Escríbenos por{" "}
+          <a className="underline" href={waLink()} target="_blank" rel="noopener noreferrer">
+            WhatsApp
+          </a>{" "}
+          o a{" "}
+          <a className="underline" href={`mailto:${contact.email}`}>
+            {contact.email}
           </a>
           .
         </p>

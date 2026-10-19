@@ -1,101 +1,127 @@
-import type { Metadata } from "next";
 import Image from "next/image";
-import PageHero from "@/components/PageHero";
+import { siteUrl } from "@/lib/site";
+import { breadcrumbSchema, businessId, pageMetadata } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
+import { Eyebrow, RevealLines, delay } from "@/components/ui";
+import { ContactSection, PageHeader, ProcessSection } from "@/components/sections";
 
-export const metadata: Metadata = {
-  title: "Sobre Nosotros | Estudio de Diseño de Interiores en Quito",
+export const metadata = pageMetadata({
+  title: "Sobre Nosotras | Diseñadoras de Interiores en Quito",
   description:
-    "Conoce a Daniela Ludeña y María José Dávila, fundadoras de Visual, estudio de diseño de interiores y arquitectura interior en Quito con más de 20 años de experiencia.",
-  keywords: [
-    "estudio de diseño de interiores Quito",
-    "diseñadoras de interiores Ecuador",
-    "arquitectas de interiores Quito",
-  ],
-  openGraph: {
-    title: "Sobre Nosotros | Visual Diseño de Interiores",
-    description:
-      "Conoce a Daniela Ludeña y María José Dávila, fundadoras de Visual, estudio de diseño de interiores en Quito.",
-    images: [{ url: "/images/about-hero.jpg" }],
-  },
-};
+    "Conoce a Daniela Ludeña y María José Dávila, fundadoras de Visual: diseñadoras de interiores ecuatorianas con más de 20 años de experiencia y estudio en Cumbayá, Quito.",
+  path: "/sobre-nosotros",
+  image: "/images/founders-1.jpg",
+});
+
+const crumbs = [
+  { name: "Inicio", path: "/" },
+  { name: "Sobre nosotras", path: "/sobre-nosotros" },
+];
+
+const founders = [
+  { name: "Daniela Ludeña", image: "/images/founder-daniela.jpg", w: 580, h: 737 },
+  { name: "María José Dávila", image: "/images/founder-mariajose.jpg", w: 738, h: 737 },
+];
+
+const values = [
+  { title: "Armonía", text: "Cada elemento dialoga con el resto: color, luz, materiales y proporción." },
+  { title: "Estilo", text: "Un lenguaje propio para cada cliente, nunca una plantilla repetida." },
+  { title: "Bienestar", text: "Espacios que se sienten bien al vivirlos, no solo al verlos." },
+];
 
 export default function SobreNosotros() {
   return (
     <>
-      <PageHero
+      <JsonLd
+        data={[
+          breadcrumbSchema(crumbs),
+          {
+            "@context": "https://schema.org",
+            "@type": "AboutPage",
+            url: `${siteUrl}/sobre-nosotros`,
+            about: { "@id": businessId },
+          },
+        ]}
+      />
+      <PageHeader
+        breadcrumbs={crumbs}
+        eyebrow="Sobre nosotras"
+        title={["El diseño interior", "no solo se ve,", <span key="a" className="accent text-taupe-deep">se vive</span>]}
+        intro="Visual nació del deseo de transformar espacios en experiencias. Somos un estudio de arquitectura interior en Cumbayá que diseña con propósito, equilibrio y sensibilidad."
         image="/images/about-hero.jpg"
-        title="Visual nació del deseo de transformar espacios en experiencias"
-        subtitle="Creemos que el diseño interior no solo se ve, se vive"
+        imageAlt="Diseñadora de Visual dibujando un plano de interiores en el estudio"
       />
 
-      <section className="grid lg:grid-cols-2 lg:items-center">
-        <div className="flex flex-col justify-center px-6 py-16 sm:px-16 lg:py-24">
-          <h2 className="font-display text-3xl">Sobre Visual</h2>
-          <p className="mt-6 font-sans leading-relaxed">
-            Somos un estudio de arquitectura interior que transforma espacios
-            en experiencias. Diseñamos con propósito, equilibrio y
-            sensibilidad, uniendo formas y sensaciones en cada detalle.
-          </p>
-          <p className="mt-4 font-sans leading-relaxed">
-            Nuestro objetivo es que cada rincón inspire armonía, estilo y
-            bienestar.
-          </p>
-        </div>
-        <div className="relative aspect-square w-full sm:aspect-[4/3] lg:aspect-square">
-          <Image
-            src="/images/founders-2.jpg"
-            alt="Daniela y María José en su estudio de diseño de interiores"
-            fill
-            className="object-cover object-top"
-            sizes="(min-width: 1024px) 50vw, 100vw"
-          />
-        </div>
-      </section>
-
-      <section className="bg-[#f5f2ee] px-6 py-16 sm:px-16 lg:py-24">
-        <h2 className="text-center font-display text-3xl">
-          Conoce a las fundadoras
-        </h2>
-        <p className="mx-auto mt-6 max-w-2xl text-center font-sans leading-relaxed">
-          Detrás de cada proyecto hay una visión compartida. Daniela Ludeña y
-          María José Dávila, fundadoras de Visual, combinan su experiencia,
-          creatividad y sensibilidad para transformar espacios en lugares
-          llenos de armonía, estilo y propósito.
-        </p>
-
-        <div className="mx-auto mt-12 grid max-w-3xl gap-8 sm:grid-cols-2">
-          <div className="text-center">
-            <div className="relative mx-auto aspect-[3/4] w-full max-w-xs overflow-hidden">
-              <Image
-                src="/images/founder-daniela.jpg"
-                alt="Daniela Ludeña"
-                fill
-                className="object-cover"
-                sizes="320px"
-              />
+      <section className="bg-ivory">
+        <div className="mx-auto grid max-w-[1400px] gap-14 px-5 py-24 sm:px-8 lg:grid-cols-12 lg:items-center lg:gap-20 lg:px-12 lg:py-32">
+          <div className="lg:col-span-6">
+            <Eyebrow>Nuestra historia</Eyebrow>
+            <RevealLines className="mt-6 font-display text-[clamp(2.2rem,4.2vw,3.6rem)] leading-[1.05]" lines={["Transformar emociones", <span key="a" className="accent text-taupe-deep">en espacios</span>]} />
+            <div className="mt-8 space-y-5 leading-relaxed" data-reveal="up">
+              <p>
+                Visual nació de la pasión de Daniela y María José, dos diseñadoras de interiores
+                ecuatorianas que encontraron en el diseño una forma de transformar emociones en
+                espacios.
+              </p>
+              <p>
+                Con más de 20 años de experiencia, combinan creatividad, técnica y sensibilidad
+                para lograr que cada proyecto refleje la esencia de quien lo habita. Hoy, Visual
+                es el resultado de su propósito compartido: acompañar a las personas a vivir
+                mejor a través del diseño.
+              </p>
             </div>
-            <p className="mt-4 font-display text-lg">Daniela Ludeña</p>
-            <p className="font-sans text-xs uppercase tracking-wide-nav text-taupe-dark">
-              Co-fundadora
-            </p>
           </div>
-          <div className="text-center">
-            <div className="relative mx-auto aspect-[3/4] w-full max-w-xs overflow-hidden">
-              <Image
-                src="/images/founder-mariajose.jpg"
-                alt="María José Dávila"
-                fill
-                className="object-cover"
-                sizes="320px"
-              />
+          <div className="grid grid-cols-2 gap-4 lg:col-span-6">
+            <div className="arch relative aspect-[3/4] overflow-hidden bg-sand" data-reveal="img">
+              <Image src="/images/founders-2.jpg" alt="Daniela y María José en su estudio de diseño de interiores en Cumbayá" fill sizes="(min-width: 1024px) 25vw, 50vw" className="object-cover" />
             </div>
-            <p className="mt-4 font-display text-lg">María José Dávila</p>
-            <p className="font-sans text-xs uppercase tracking-wide-nav text-taupe-dark">
-              Co-fundadora
-            </p>
+            <div className="relative mt-16 aspect-[3/4] overflow-hidden bg-sand" data-reveal="img" style={delay(0.12)}>
+              <Image src="/images/about-moodboard-2.jpg" alt="Selección de materiales, muestras y paleta de colores para un proyecto" fill sizes="(min-width: 1024px) 25vw, 50vw" className="object-cover" />
+            </div>
           </div>
         </div>
       </section>
+
+      <section className="bg-linen">
+        <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
+          <div className="text-center">
+            <Eyebrow className="justify-center">Fundadoras</Eyebrow>
+            <RevealLines className="mt-6 font-display text-[clamp(2.2rem,4.2vw,3.6rem)] leading-[1.05]" lines={["Conoce a quienes", <span key="a" className="accent text-taupe-deep">diseñan tu espacio</span>]} />
+          </div>
+          <div className="mx-auto mt-16 grid max-w-4xl gap-10 sm:grid-cols-2">
+            {founders.map((f, i) => (
+              <figure key={f.name} className="text-center" data-reveal="up" style={delay(i * 0.12)}>
+                <div className="zoom arch relative mx-auto aspect-[3/4] w-full max-w-sm overflow-hidden bg-sand">
+                  <Image src={f.image} alt={`${f.name}, diseñadora de interiores y co-fundadora de Visual`} fill sizes="(min-width: 640px) 384px, 100vw" className="object-cover object-top" />
+                </div>
+                <figcaption className="mt-6">
+                  <span className="block font-display text-2xl text-ink">{f.name}</span>
+                  <span className="eyebrow mt-2 block">Diseñadora de interiores · Co-fundadora</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-ivory">
+        <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
+          <Eyebrow>Lo que nos guía</Eyebrow>
+          <div className="mt-12 grid gap-12 md:grid-cols-3">
+            {values.map((v, i) => (
+              <div key={v.title} className="border-t border-ink/15 pt-8" data-reveal="up" style={delay(i * 0.1)}>
+                <p className="font-display text-[clamp(2.4rem,4vw,3.4rem)] leading-none text-ink">
+                  <span className="accent text-taupe-deep">{v.title}</span>
+                </p>
+                <p className="mt-5 max-w-xs leading-relaxed">{v.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <ProcessSection />
+      <ContactSection placement="nosotras" title={["Trabajemos", "juntas en tu espacio"]} />
     </>
   );
 }
