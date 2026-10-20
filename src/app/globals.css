@@ -339,3 +339,8 @@ html.lenis, html.lenis body { height: auto; }
   .marquee-track, .film-track, .hero-drift { animation: none; }
   .curtain { display: none; }
 }
+
+@layer utilities {
+  .no-scrollbar { scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+}

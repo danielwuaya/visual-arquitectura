@@ -183,12 +183,25 @@ export const inspirationAlt: Record<string, string> = {
   "/images/inspiracion/bano-azul.jpg": "Baño con azulejos azules artesanales y mueble de madera",
 };
 
-export const process = [
-  { title: "Agenda tu asesoría", text: "Conversamos sobre tu espacio, tus necesidades y tu estilo, y visitamos el lugar para entender su potencial." },
-  { title: "Planificación", text: "Definimos alcance, prioridades y tiempos. Levantamos medidas y analizamos el potencial del espacio." },
-  { title: "Diseño", text: "Creamos el concepto, la distribución, los materiales y los renders para que veas el resultado antes de construir." },
-  { title: "Presupuesto", text: "Te entregamos un presupuesto claro y detallado, sin sorpresas, para que decidas con tranquilidad." },
-  { title: "Ejecución", text: "Coordinamos proveedores y obra, cuidando cada detalle hasta entregarte un espacio listo para vivir." },
+export type ProcessStep = { title: string; text: string; image: string; imageAlt: string; tag: string; plan?: boolean };
+
+export const process: ProcessStep[] = [
+  { title: "Agenda tu asesoría", text: "Conversamos sobre tu espacio, tus necesidades y tu estilo, y visitamos el lugar para entender su potencial.", image: "/images/team-laptop.jpg", imageAlt: "Diseñadoras de Visual revisando ideas para un proyecto de interiores", tag: "Primera conversación" },
+  { title: "Planificación", text: "Levantamos medidas y dibujamos los planos: distribución, circulación y mobiliario a escala, para que cada metro trabaje a tu favor.", image: "/images/proceso/plano-isometrico.jpg", imageAlt: "Plano isométrico de distribución de una oficina con medidas y mobiliario", tag: "Planos y distribución", plan: true },
+  { title: "Diseño y renders 3D", text: "Creamos el concepto, los materiales y los renders fotorrealistas para que veas tu espacio terminado antes de construir.", image: "/images/proceso/render-cowork.jpg", imageAlt: "Render 3D de un espacio de trabajo diseñado por Visual", tag: "Render 3D" },
+  { title: "Presupuesto", text: "Te entregamos un presupuesto claro y detallado, sin sorpresas, para que decidas con tranquilidad.", image: "/images/about-moodboard-2.jpg", imageAlt: "Muestras de materiales y acabados para un proyecto de interiores", tag: "Materiales y costos" },
+  { title: "Ejecución", text: "Coordinamos proveedores y obra, cuidando cada detalle hasta entregarte un espacio listo para vivir.", image: "/images/proceso/obra.jpg", imageAlt: "Espacio terminado por Visual con muro geométrico", tag: "Obra y entrega" },
+];
+
+export const renders = [
+  { src: "/images/proceso/plano-consultorio.jpg", alt: "Plano isométrico de un consultorio con distribución de mobiliario", label: "Plano", plan: true },
+  { src: "/images/proceso/render-piscina.jpg", alt: "Render 3D nocturno de una piscina con iluminación cálida", label: "Render 3D" },
+  { src: "/images/proceso/render-terraza.jpg", alt: "Render 3D de una cafetería con terraza", label: "Render 3D" },
+  { src: "/images/proceso/render-cocina.jpg", alt: "Render 3D de una cocina con isla", label: "Render 3D" },
+  { src: "/images/proceso/render-fachada.jpg", alt: "Render 3D de la fachada de una casa", label: "Render 3D" },
+  { src: "/images/proceso/render-recepcion.jpg", alt: "Render 3D de la recepción de una oficina", label: "Render 3D" },
+  { src: "/images/proceso/render-bar.jpg", alt: "Render 3D de la barra de una cafetería", label: "Render 3D" },
+  { src: "/images/proceso/render-cocina-2.jpg", alt: "Render 3D de una cocina abierta", label: "Render 3D" },
 ];
 
 export const homeFaqs: Faq[] = [

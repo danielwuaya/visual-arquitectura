@@ -2,7 +2,8 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { contact, waLink } from "@/lib/site";
-import { process as steps, type Faq as FaqItem } from "@/lib/content";
+import { process as steps, renders, type Faq as FaqItem } from "@/lib/content";
+import ProcessShowcase from "@/components/ProcessShowcase";
 import ContactForm from "@/components/ContactForm";
 import FaqList from "@/components/FaqList";
 import TrackLink from "@/components/TrackLink";
@@ -147,7 +148,7 @@ export function ContactSection({
 export function ProcessSection({ dark = true }: { dark?: boolean }) {
   return (
     <section className={dark ? "bg-espresso text-ivory/75" : "bg-canvas"}>
-      <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
+      <div className="mx-auto max-w-[1400px] px-5 pb-20 pt-24 sm:px-8 lg:px-12 lg:pb-28 lg:pt-32">
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
             <Eyebrow className={dark ? "text-taupe" : ""}>Cómo trabajamos</Eyebrow>
@@ -162,18 +163,36 @@ export function ProcessSection({ dark = true }: { dark?: boolean }) {
           </p>
         </div>
 
-        <ol className="relative mt-16 grid gap-10 sm:grid-cols-2 lg:mt-24 lg:grid-cols-5 lg:gap-8">
-          <span aria-hidden="true" className={`grow-line absolute left-0 right-0 top-[1.1rem] hidden h-px lg:block ${dark ? "bg-ivory/25" : "bg-ink/20"}`} />
-          {steps.map((step, i) => (
-            <li key={step.title} className="relative" data-reveal="up" style={delay(i * 0.1)}>
-              <span className={`relative z-10 flex h-9 w-9 items-center justify-center rounded-full border text-xs ${dark ? "border-taupe bg-espresso text-taupe" : "border-ink/30 bg-canvas text-taupe-deep"}`}>
-                0{i + 1}
-              </span>
-              <h3 className={`mt-6 font-display text-xl ${dark ? "text-ivory" : ""}`}>{step.title}</h3>
-              <p className="mt-3 text-[0.95rem] leading-relaxed">{step.text}</p>
+        <ProcessShowcase steps={steps} />
+      </div>
+
+      {/* Del plano al render: entregables reales del proceso */}
+      <div className="border-t border-ivory/10 pb-24 pt-16 lg:pb-32 lg:pt-20">
+        <div className="mx-auto flex max-w-[1400px] flex-col gap-4 px-5 sm:px-8 lg:flex-row lg:items-end lg:justify-between lg:px-12">
+          <div>
+            <Eyebrow className="text-taupe">Del plano al render</Eyebrow>
+            <h3 className="mt-4 font-display text-[clamp(1.8rem,3.2vw,2.8rem)] leading-[1.08] text-ivory" data-reveal="up">
+              Ves tu espacio <span className="accent text-taupe">antes de construirlo</span>
+            </h3>
+          </div>
+          <p className="max-w-md text-[0.95rem] leading-relaxed" data-reveal="up">
+            Planos a escala y renders 3D fotorrealistas: así decides materiales, luz y
+            distribución con total certeza, antes de mover un solo ladrillo.
+          </p>
+        </div>
+        <ul className="no-scrollbar mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 sm:px-8 lg:mx-auto lg:grid lg:max-w-[1400px] lg:grid-cols-4 lg:gap-5 lg:overflow-visible lg:px-12">
+          {renders.map((r, i) => (
+            <li
+              key={r.src}
+              className={`relative shrink-0 snap-start overflow-hidden rounded-[1.5rem] ${r.plan ? "aspect-square w-[72vw] bg-[#a09d9b] sm:w-[22rem]" : "aspect-[16/10] w-[82vw] sm:w-[30rem]"} lg:aspect-[4/3] lg:w-auto`}
+              data-reveal="up"
+              style={delay(Math.min(i, 4) * 0.08)}
+            >
+              <Image src={r.src} alt={r.alt} fill sizes="(min-width: 1024px) 25vw, (min-width: 640px) 480px, 82vw" className="object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(.22,1,.36,1)] hover:scale-[1.04]" />
+              <span className="absolute left-4 top-4 rounded-full bg-espresso/60 px-3 py-1.5 text-[0.7rem] text-ivory backdrop-blur-md">{r.label}</span>
             </li>
           ))}
-        </ol>
+        </ul>
       </div>
     </section>
   );
