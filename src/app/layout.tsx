@@ -11,32 +11,25 @@ import { siteName, siteUrl } from "@/lib/site";
 import { localBusinessSchema, websiteSchema } from "@/lib/seo";
 
 // Fuentes alojadas en el propio sitio: más rápidas y sin depender de Google.
-const marcellus = localFont({
-  src: "../fonts/marcellus-latin-400-normal.woff2",
-  variable: "--font-marcellus",
-  weight: "400",
+const serif = localFont({
+  src: [
+    { path: "../fonts/instrument-serif-latin-400-normal.woff2", weight: "400", style: "normal" },
+    { path: "../fonts/instrument-serif-latin-400-italic.woff2", weight: "400", style: "italic" },
+  ],
+  variable: "--font-serif-face",
   display: "swap",
 });
 
-const jost = localFont({
-  src: "../fonts/jost-latin-wght-normal.woff2",
-  variable: "--font-jost",
+const sans = localFont({
+  src: "../fonts/inter-latin-wght-normal.woff2",
+  variable: "--font-sans-face",
   weight: "300 600",
   display: "swap",
 });
 
-const cormorant = localFont({
-  src: [
-    { path: "../fonts/cormorant-garamond-latin-400-italic.woff2", weight: "400", style: "italic" },
-    { path: "../fonts/cormorant-garamond-latin-500-italic.woff2", weight: "500", style: "italic" },
-  ],
-  variable: "--font-cormorant",
-  display: "swap",
-});
-
-const defaultTitle = "Diseño de Interiores en Quito y Cumbayá | Visual";
+const defaultTitle = "Visual | Diseño de Interiores y Arquitectura Interior en Quito";
 const defaultDescription =
-  "Estudio de diseño de interiores en Cumbayá, Quito. Diseñamos casas, departamentos, oficinas y locales comerciales con armonía, estilo y bienestar. Agenda tu asesoría.";
+  "Visual es un estudio de diseño de interiores y arquitectura interior. Creamos hogares, oficinas y espacios comerciales en Quito, Cumbayá y Tumbaco con armonía, estilo y bienestar. Agenda tu asesoría.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -80,17 +73,17 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f7f3ee",
+  themeColor: "#262523",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="es-EC" suppressHydrationWarning className={`${marcellus.variable} ${jost.variable} ${cormorant.variable}`}>
+    <html lang="es-EC" suppressHydrationWarning className={`${serif.variable} ${sans.variable}`}>
       <body className="min-h-screen">
         {/* Activa las animaciones solo si hay JavaScript (el contenido nunca queda oculto) */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
         <JsonLd data={[localBusinessSchema(), websiteSchema()]} />
-        <a href="#contenido" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-ink focus:px-4 focus:py-2 focus:text-ivory">
+        <a href="#contenido" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-ivory focus:px-4 focus:py-2 focus:text-espresso">
           Saltar al contenido
         </a>
         <Header />

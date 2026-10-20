@@ -123,7 +123,7 @@ export default function ContactForm({ placement = "form" }: { placement?: string
                   htmlFor={id}
                   className={`block cursor-pointer rounded-full border px-4 py-2.5 text-[0.8rem] transition-all duration-300 peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-taupe-deep ${
                     active
-                      ? "border-ink bg-ink text-ivory"
+                      ? "border-ivory bg-ivory text-espresso"
                       : "border-ink/20 text-body hover:border-ink/60"
                   }`}
                 >

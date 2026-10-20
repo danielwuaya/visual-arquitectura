@@ -62,7 +62,7 @@ export default function ProjectGallery({ projects, filters: showFilters = true }
                 setAnimKey((k) => k + 1);
               }}
               className={`rounded-full border px-5 py-2.5 text-[0.8rem] transition-all duration-300 ${
-                filter === f.key ? "border-ink bg-ink text-ivory" : "border-ink/20 hover:border-ink/60"
+                filter === f.key ? "border-ivory bg-ivory text-espresso" : "border-ink/20 hover:border-ink/60"
               }`}
             >
               {f.label} <span className="ml-1 opacity-50">{count}</span>
@@ -78,7 +78,7 @@ export default function ProjectGallery({ projects, filters: showFilters = true }
             <button
               type="button"
               onClick={() => setIndex(i)}
-              className="zoom group relative block w-full overflow-hidden bg-sand text-left"
+              className="zoom group relative block w-full overflow-hidden bg-canvas-3 text-left"
               aria-label={`Ver en grande: ${p.title}`}
             >
               <Image
@@ -89,7 +89,7 @@ export default function ProjectGallery({ projects, filters: showFilters = true }
                 sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                 className="h-auto w-full"
               />
-              <span className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
+              <span className="absolute inset-0 bg-gradient-to-t from-espresso/70 via-transparent to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
               <span className="absolute inset-x-5 bottom-5 translate-y-3 text-ivory opacity-0 transition-all duration-700 group-hover:translate-y-0 group-hover:opacity-100">
                 <span className="eyebrow block text-ivory/70">
                   {labels[p.category] ?? p.category}
@@ -103,7 +103,7 @@ export default function ProjectGallery({ projects, filters: showFilters = true }
 
       {current && (
         <div
-          className="lb fixed inset-0 z-[80] flex flex-col bg-ink/95 text-ivory"
+          className="lb fixed inset-0 z-[80] flex flex-col bg-espresso/95 text-ivory"
           role="dialog"
           aria-modal="true"
           aria-label={current.title}
@@ -130,10 +130,10 @@ export default function ProjectGallery({ projects, filters: showFilters = true }
           </div>
           <div className="relative flex-1" onClick={(e) => e.stopPropagation()}>
             <Image key={current.src} src={current.src} alt={current.alt} fill sizes="100vw" className="lb-img object-contain px-4 pb-6 sm:px-24" />
-            <button type="button" onClick={() => go(-1)} aria-label="Anterior" className="absolute left-2 top-1/2 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-ivory/30 transition hover:bg-ivory hover:text-ink sm:flex">
+            <button type="button" onClick={() => go(-1)} aria-label="Anterior" className="absolute left-2 top-1/2 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-ivory/30 transition hover:bg-ivory hover:text-espresso sm:flex">
               ←
             </button>
-            <button type="button" onClick={() => go(1)} aria-label="Siguiente" className="absolute right-2 top-1/2 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-ivory/30 transition hover:bg-ivory hover:text-ink sm:flex">
+            <button type="button" onClick={() => go(1)} aria-label="Siguiente" className="absolute right-2 top-1/2 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-ivory/30 transition hover:bg-ivory hover:text-espresso sm:flex">
               →
             </button>
           </div>

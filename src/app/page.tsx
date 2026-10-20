@@ -2,39 +2,62 @@ import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { homeFaqs, services, testimonials } from "@/lib/content";
-import { caseStudies } from "@/lib/cases";
-import CaseCard from "@/components/CaseCard";
 import { waLink } from "@/lib/site";
 import { faqSchema, pageMetadata } from "@/lib/seo";
 import JsonLd from "@/components/JsonLd";
+import HeroShowcase, { type HeroSlide } from "@/components/HeroShowcase";
 import TrackLink from "@/components/TrackLink";
 import { WhatsAppIcon } from "@/components/icons";
 import { ArrowIcon, Eyebrow, RevealLines, delay } from "@/components/ui";
-import { ContactSection, CtaBand, FaqSection, ProcessSection } from "@/components/sections";
+import { ContactSection, FaqSection, ProcessSection } from "@/components/sections";
 
 export const metadata = pageMetadata({
-  title: "Diseño de Interiores en Quito y Cumbayá | Visual",
+  title: "Visual | Diseño de Interiores y Arquitectura Interior en Quito",
   absoluteTitle: true,
   description:
-    "Estudio de diseño de interiores en Cumbayá, Quito, con más de 20 años de experiencia. Diseñamos casas, departamentos, oficinas y locales con armonía, estilo y bienestar. Agenda tu asesoría.",
+    "Visual es un estudio de diseño de interiores y arquitectura interior. Creamos hogares, oficinas y espacios comerciales en Quito, Cumbayá y Tumbaco con armonía, estilo y bienestar. Agenda tu asesoría.",
   path: "/",
+  image: "/images/inspiracion/sala-doble-altura.jpg",
+  imageAlt: "Sala de doble altura con lámpara escultórica de fibras naturales",
 });
 
+const I = "/images/inspiracion";
 
-const marquee = [
-  "Diseño residencial",
-  "Oficinas",
-  "Locales comerciales",
-  "Remodelaciones",
-  "Airbnb",
-  "Mobiliario a medida",
-  "Cumbayá",
-  "Tumbaco",
-  "Quito",
+const heroSlides: HeroSlide[] = [
+  { src: `${I}/sala-doble-altura.jpg`, alt: "Sala de doble altura con lámpara escultórica de fibras naturales y ventanales al jardín", label: "Sala de doble altura" },
+  { src: `${I}/dormitorio-nogal.jpg`, alt: "Dormitorio en tonos cálidos con cabecera tapizada y vestidor en nogal", label: "Dormitorio en nogal" },
+  { src: `${I}/lounge-ejecutivo.jpg`, alt: "Oficina ejecutiva con paneles de madera, luz indirecta y sala de cuero", label: "Oficina ejecutiva" },
+  { src: `${I}/bano-spa.jpg`, alt: "Baño tipo spa con tina de piedra, ducha de lluvia y jardín interior", label: "Baño spa" },
+  { src: `${I}/cocina-roble.jpg`, alt: "Cocina blanca con madera de roble, listones e iluminación lineal", label: "Cocina en roble" },
+];
+
+const film = [
+  { src: `${I}/tv-divisor-luz.jpg`, label: "Luz que dibuja" },
+  { src: `${I}/oficina-concreto.jpg`, label: "Materia honesta" },
+  { src: `${I}/banca-ventana.jpg`, label: "Rincones para pausar" },
+  { src: `${I}/bano-azul.jpg`, label: "Color con intención" },
+  { src: `${I}/estudio-sala.jpg`, label: "Calma y orden" },
+  { src: `${I}/sala-reuniones-vidrio.jpg`, label: "Transparencia" },
+  { src: `${I}/jardin-nocturno.jpg`, label: "El exterior también se diseña" },
+  { src: `${I}/oficina-dos-escritorios.jpg`, label: "Trabajo con bienestar" },
+];
+
+const spaces = [
+  { ...services[0], title: "Hogares que abrazan", img: `${I}/dormitorio-nogal.jpg`, alt: "Dormitorio cálido con madera de nogal y luz indirecta" },
+  { ...services[1], title: "Oficinas que inspiran", img: `${I}/oficina-concreto.jpg`, alt: "Oficina contemporánea con concreto, madera y lámparas colgantes" },
+  { ...services[2], title: "Espacios que venden", img: `${I}/lounge-ejecutivo.jpg`, alt: "Lounge con paneles de madera, sillones de cuero y luz cálida" },
+];
+
+const details = [
+  ["Distribución", "Cada metro con un propósito."],
+  ["Iluminación", "Capas de luz para cada momento."],
+  ["Materiales", "Texturas nobles que envejecen bien."],
+  ["Mobiliario a medida", "Piezas pensadas para tu espacio."],
+  ["Renders 3D", "Ves el resultado antes de construir."],
 ];
 
 const manifesto =
-  "Un mal diseño limita tu espacio. Nosotras lo transformamos en un lugar funcional, bello y lleno de armonía, que refleja quién eres y cómo quieres vivir.";
+  "Creemos que un espacio bien diseñado cambia la forma en que vives, trabajas y descansas. Por eso diseñamos con calma: escuchando, midiendo y cuidando cada detalle hasta que todo encuentra su lugar.";
 
 export default function Home() {
   return (
@@ -42,103 +65,38 @@ export default function Home() {
       <JsonLd data={faqSchema(homeFaqs)} />
 
       {/* ───────────── Hero ───────────── */}
-      <section className="grain relative overflow-hidden pt-28 lg:pt-32">
-        <div className="mx-auto grid max-w-[1400px] gap-12 px-5 pb-20 sm:px-8 lg:min-h-[calc(100svh-8rem)] lg:grid-cols-12 lg:items-center lg:gap-8 lg:px-12 lg:pb-24">
-          <div className="lg:col-span-6 lg:pr-6">
-            <p className="eyebrow hero-fade" style={delay(0.1)}>
-              Estudio de diseño de interiores · Cumbayá
-            </p>
-            <h1 className="mt-7 font-display text-[clamp(2.7rem,5.4vw,5.2rem)] leading-[1]">
-              <span className="hero-line block overflow-hidden pb-[0.06em]"><span style={delay(0.05)}>Diseño de</span></span>
-              <span className="hero-line block overflow-hidden pb-[0.06em]"><span style={delay(0.13)}>interiores en</span></span>
-              <span className="hero-line block overflow-hidden pb-[0.1em]">
-                <span style={delay(0.21)}>
-                  Quito <span className="accent whitespace-nowrap text-taupe-deep">y Cumbayá</span>
+      <section className="grain relative overflow-hidden pt-28 lg:pt-28">
+        <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
+          <div className="grid gap-6 pb-8 lg:grid-cols-12 lg:items-end lg:pb-10">
+            <div className="lg:col-span-8">
+              <p className="eyebrow hero-fade" style={delay(0.05)}>
+                Estudio de diseño interior &amp; arquitectura interior
+              </p>
+              <h1 className="mt-5 font-display text-[clamp(2.9rem,5.8vw,5.6rem)] leading-[0.98]">
+                <span className="hero-line block overflow-hidden pb-[0.08em]"><span style={delay(0.1)}>Diseño interior que se siente</span></span>
+                <span className="hero-line block overflow-hidden pb-[0.1em]">
+                  <span style={delay(0.2)}>
+                    <span className="accent text-taupe-deep">antes de verse.</span>
+                  </span>
                 </span>
-              </span>
-            </h1>
-            <p className="hero-fade mt-8 max-w-lg text-[1.08rem] leading-relaxed" style={delay(0.65)}>
-              Creamos espacios con armonía, estilo y bienestar. Casas, departamentos,
-              oficinas y locales comerciales diseñados para sentirse como tú, del
-              concepto a la ejecución.
-            </p>
-            <div className="hero-fade mt-10 flex flex-col gap-3 sm:flex-row" style={delay(0.8)}>
-              <Link href="/contacto" className="btn btn-primary">
-                Agenda tu asesoría <ArrowIcon />
-              </Link>
-              <TrackLink event="whatsapp_click" placement="hero" href={waLink()} className="btn btn-outline">
-                <WhatsAppIcon className="h-4 w-4" /> Escríbenos por WhatsApp
-              </TrackLink>
+              </h1>
             </div>
-            <dl className="hero-fade mt-14 grid max-w-lg grid-cols-3 gap-4 border-t sm:gap-6 border-ink/15 pt-6" style={delay(0.95)}>
-              {[
-                ["+20", "años de experiencia"],
-                ["Diseño", "y ejecución de obra"],
-                ["Showroom", "digital en 4K"],
-              ].map(([n, label]) => (
-                <div key={label}>
-                  <dt className="sr-only">{label}</dt>
-                  <dd>
-                    <span className="block font-display text-xl text-ink sm:text-3xl">{n}</span>
-                    <span className="mt-1 block text-xs leading-snug">{label}</span>
-                  </dd>
-                </div>
-              ))}
-            </dl>
+            <div className="hero-fade lg:col-span-4 lg:pb-4" style={delay(0.5)}>
+              <p className="max-w-sm text-[1.02rem] leading-relaxed">
+                Creamos hogares, oficinas y espacios comerciales con armonía, estilo y
+                bienestar. Del primer boceto a la última luz encendida.
+              </p>
+            </div>
           </div>
-
-          <div className="relative lg:col-span-6">
-            <div className="hero-unveil arch relative ml-auto aspect-[4/5] w-full max-w-[560px] overflow-hidden bg-sand" style={delay(0.2)}>
-              <Image
-                src="/images/proyectos/boutique-almara/01.jpg"
-                alt="Recepción de la Boutique Almara diseñada por Visual, estudio de diseño de interiores en Cumbayá"
-                fill
-                priority
-                fetchPriority="high"
-                sizes="(min-width: 1024px) 560px, 100vw"
-                className="object-cover object-[50%_40%]"
-              />
-            </div>
-            <div className="hero-fade absolute -bottom-8 left-0 hidden aspect-square w-44 overflow-hidden rounded-full border-[6px] border-ivory sm:block lg:-left-6 lg:w-52" style={delay(1.1)}>
-              <Image src="/images/proyectos/casa-betania/01.jpg" alt="Dormitorio infantil con cabeceras en forma de nube, Casa Betania" fill sizes="208px" className="object-cover" />
-            </div>
-            <Link
-              href="/contacto"
-              aria-label="Agenda tu asesoría"
-              className="hero-fade group absolute -top-4 right-0 hidden h-32 w-32 items-center justify-center rounded-full bg-espresso text-ivory sm:flex lg:right-[-1rem]"
-              style={delay(1.2)}
-            >
-              <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full animate-[spin_18s_linear_infinite] p-1.5" aria-hidden="true">
-                <defs>
-                  <path id="circle" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0" />
-                </defs>
-                <text fontSize="8.6" letterSpacing="2.6" fill="currentColor" className="font-sans uppercase">
-                  <textPath href="#circle">Agenda tu asesoría · Visual · </textPath>
-                </text>
-              </svg>
-              <ArrowIcon className="h-6 w-6 -rotate-45 transition-transform duration-500 group-hover:rotate-0" />
-            </Link>
-          </div>
+          <HeroShowcase slides={heroSlides} />
         </div>
       </section>
 
-      {/* ───────────── Cinta ───────────── */}
-      <div className="marquee overflow-hidden border-y border-ink/10 bg-linen py-6" aria-hidden="true">
-        <div className="marquee-track flex w-max gap-10">
-          {[...marquee, ...marquee].map((w, i) => (
-            <span key={i} className="flex items-center gap-10 whitespace-nowrap font-display text-2xl text-ink/80 sm:text-3xl">
-              {w}
-              <span className="text-base text-taupe">✦</span>
-            </span>
-          ))}
-        </div>
-      </div>
-
       {/* ───────────── Manifiesto ───────────── */}
-      <section className="bg-ivory">
-        <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:px-12 lg:py-40">
-          <Eyebrow>Sobre Visual</Eyebrow>
-          <p className="ink-words mt-8 max-w-5xl font-display text-[clamp(1.9rem,4.2vw,3.6rem)] leading-[1.15] text-ink">
+      <section className="bg-canvas">
+        <div className="mx-auto max-w-[1400px] px-5 py-28 sm:px-8 lg:px-12 lg:py-44">
+          <Eyebrow>Nuestra manera de diseñar</Eyebrow>
+          <p className="ink-words mt-10 max-w-5xl font-display text-[clamp(2rem,4.4vw,4rem)] leading-[1.1] text-ink">
             {manifesto.split(" ").map((w, i, all) => (
               <span key={i} style={{ "--r": `cover ${10 + (i / all.length) * 30}% cover ${22 + (i / all.length) * 30}%` } as CSSProperties}>
                 {w}{" "}
@@ -147,80 +105,95 @@ export default function Home() {
           </p>
           <div className="mt-14 flex flex-col gap-6 sm:flex-row sm:items-center" data-reveal="up">
             <Link href="/sobre-nosotros" className="btn btn-outline">
-              Conoce al estudio <ArrowIcon />
+              Conoce el estudio <ArrowIcon />
             </Link>
             <p className="max-w-sm text-sm">
-              Arquitectura interior con propósito, equilibrio y sensibilidad, uniendo
-              forma y emoción en cada detalle.
+              Interiorismo residencial y corporativo con más de 20 años de experiencia.
             </p>
           </div>
         </div>
       </section>
 
-      {/* ───────────── Servicios ───────────── */}
-      <section className="bg-ivory pb-24 lg:pb-40">
-        <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
-          <div className="flex flex-col justify-between gap-6 border-t border-ink/15 pt-16 lg:flex-row lg:items-end">
+      {/* ───────────── Cinta de atmósferas ───────────── */}
+      <section aria-label="Atmósferas" className="film overflow-hidden bg-canvas pb-28 lg:pb-40">
+        <div className="film-track flex w-max gap-5">
+          {[...film, ...film].map((f, i) => (
+            <figure key={i} className="group relative h-[52vh] max-h-[520px] min-h-[340px] w-[min(72vw,360px)] shrink-0 overflow-hidden rounded-[1.75rem] bg-canvas-3" aria-hidden={i >= film.length}>
+              <Image src={f.src} alt={i < film.length ? f.label : ""} fill sizes="360px" className="object-cover transition-transform duration-[1.4s] ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-105" />
+              <span className="absolute inset-0 bg-gradient-to-t from-espresso/70 via-transparent to-transparent" />
+              <figcaption className="absolute bottom-5 left-5 right-5 font-display text-2xl text-ivory">{f.label}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+
+      {/* ───────────── Espacios ───────────── */}
+      <section className="bg-canvas-2">
+        <div className="mx-auto max-w-[1400px] px-5 py-28 sm:px-8 lg:px-12 lg:py-40">
+          <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
             <div>
-              <Eyebrow>Servicios</Eyebrow>
+              <Eyebrow>Lo que diseñamos</Eyebrow>
               <RevealLines
-                className="mt-6 font-display text-[clamp(2.2rem,4.6vw,4rem)] leading-[1.05]"
-                lines={["¿Para quién", <span key="a" className="accent text-taupe-deep">diseñamos?</span>]}
+                className="mt-6 font-display text-[clamp(2.4rem,5vw,4.6rem)] leading-[1]"
+                lines={["Espacios con", <span key="a" className="accent text-taupe-deep">intención</span>]}
               />
             </div>
             <p className="max-w-md leading-relaxed" data-reveal="up">
-              Diseñamos espacios con intención para todo tipo de proyectos en Quito,
-              Cumbayá y Tumbaco. Descubre cómo podemos ayudarte.
+              Diseño de interiores residencial, oficinas y locales comerciales. Cada
+              proyecto empieza por entender cómo quieres sentirte en él.
             </p>
           </div>
 
-          <div className="mt-16 grid gap-12 md:grid-cols-3 md:gap-8">
-            {services.map((s, i) => (
-              <Link
-                key={s.slug}
-                href={`/servicios/${s.slug}`}
-                className={`group block ${i === 1 ? "md:mt-24" : ""} ${i === 2 ? "md:mt-12" : ""}`}
-                data-reveal="up"
-                style={delay(i * 0.12)}
-              >
-                <div className="zoom relative aspect-[3/4] overflow-hidden bg-sand" data-reveal="img" style={delay(i * 0.12)}>
-                  <Image src={s.image} alt={s.imageAlt} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover" />
-                  <span className="absolute left-5 top-5 font-display text-sm text-ivory mix-blend-difference">0{i + 1}</span>
+          <div className="mt-16 grid gap-12 md:grid-cols-3 md:gap-6">
+            {spaces.map((s, i) => (
+              <Link key={s.slug} href={`/servicios/${s.slug}`} className={`group block ${i === 1 ? "md:mt-20" : ""}`} data-reveal="up" style={delay(i * 0.12)}>
+                <div className="zoom relative aspect-[3/4] overflow-hidden bg-canvas-3" data-reveal="img" style={delay(i * 0.12)}>
+                  <Image src={s.img} alt={s.alt} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover" />
+                  <span className="absolute inset-0 bg-gradient-to-t from-espresso/80 via-espresso/10 to-transparent" />
+                  <div className="absolute inset-x-6 bottom-6">
+                    <p className="eyebrow text-ivory/70">0{i + 1} · {s.name}</p>
+                    <h3 className="mt-3 font-display text-[2rem] leading-[1.05] text-ivory">{s.title}</h3>
+                  </div>
+                  <span className="absolute right-5 top-5 flex h-11 w-11 items-center justify-center rounded-full border border-ivory/40 text-ivory transition-all duration-500 group-hover:bg-ivory group-hover:text-espresso">
+                    <ArrowIcon className="h-4 w-4 -rotate-45" />
+                  </span>
                 </div>
-                <h3 className="mt-6 font-display text-2xl">{s.name}</h3>
-                <p className="mt-3 max-w-sm leading-relaxed">{s.short}</p>
-                <span className="mt-5 inline-flex items-center gap-2 text-[0.72rem] uppercase tracking-[0.2em] text-ink">
-                  <span className="link-u-on">Descubre más</span>
-                  <ArrowIcon className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
-                </span>
+                <p className="mt-5 max-w-sm leading-relaxed">{s.short}</p>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ───────────── Proyectos destacados ───────────── */}
-      <section className="bg-linen">
-        <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:px-12 lg:py-36">
-          <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
-            <div>
-              <Eyebrow>Portafolio</Eyebrow>
-              <RevealLines
-                className="mt-6 font-display text-[clamp(2.2rem,4.6vw,4rem)] leading-[1.05]"
-                lines={["Proyectos", <span key="a" className="accent text-taupe-deep">destacados</span>]}
-              />
+      {/* ───────────── Detalle ───────────── */}
+      <section className="bg-canvas">
+        <div className="mx-auto grid max-w-[1400px] gap-14 px-5 py-28 sm:px-8 lg:grid-cols-12 lg:items-center lg:gap-20 lg:px-12 lg:py-40">
+          <div className="relative lg:col-span-6">
+            <div className="parallax relative aspect-[4/5] overflow-hidden bg-canvas-3" data-reveal="img">
+              <Image src={`${I}/bano-spa.jpg`} alt="Baño tipo spa con tina de piedra, madera y jardín interior" fill sizes="(min-width: 1024px) 45vw, 100vw" className="object-cover" />
             </div>
-            <Link href="/portafolio" className="btn btn-outline self-start lg:self-auto" data-reveal="up">
-              Ver portafolio completo <ArrowIcon />
-            </Link>
+            <div className="glass absolute -bottom-8 right-4 hidden max-w-[16rem] rounded-[1.5rem] p-6 sm:block lg:-right-10" data-reveal="up">
+              <p className="font-display text-4xl text-ivory">+20</p>
+              <p className="mt-1 text-sm text-ivory/75">años diseñando espacios que se viven, no solo se ven.</p>
+            </div>
           </div>
-
-          <div className="mt-16 grid gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
-            {caseStudies.slice(0, 3).map((c, i) => (
-              <div key={c.slug} className={i === 1 ? "lg:mt-24" : ""}>
-                <CaseCard c={c} index={i} />
-              </div>
-            ))}
+          <div className="lg:col-span-6">
+            <Eyebrow>El detalle lo es todo</Eyebrow>
+            <RevealLines
+              className="mt-6 font-display text-[clamp(2.4rem,4.6vw,4.2rem)] leading-[1.02]"
+              lines={["Pensado a la medida", <span key="a" className="accent text-taupe-deep">de tu forma de vivir</span>]}
+            />
+            <ul className="mt-12 border-t border-ink/10">
+              {details.map(([t, d], i) => (
+                <li key={t} className="flex items-baseline justify-between gap-6 border-b border-ink/10 py-5" data-reveal="up" style={delay(i * 0.06)}>
+                  <span className="font-display text-2xl text-ink">{t}</span>
+                  <span className="text-right text-sm">{d}</span>
+                </li>
+              ))}
+            </ul>
+            <Link href="/servicios" className="btn btn-outline mt-10" data-reveal="up">
+              Ver servicios <ArrowIcon />
+            </Link>
           </div>
         </div>
       </section>
@@ -228,20 +201,17 @@ export default function Home() {
       <ProcessSection />
 
       {/* ───────────── Fundadoras ───────────── */}
-      <section className="bg-ivory">
-        <div className="mx-auto grid max-w-[1400px] gap-14 px-5 py-24 sm:px-8 lg:grid-cols-12 lg:items-center lg:gap-20 lg:px-12 lg:py-36">
-          <div className="relative lg:col-span-5">
-            <div className="arch relative aspect-[4/5] overflow-hidden bg-sand" data-reveal="img">
-              <Image src="/images/founders-1.jpg" alt="Daniela Ludeña y María José Dávila, fundadoras de Visual, diseñadoras de interiores en Quito" fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover object-top" />
-            </div>
-            <div className="drift absolute -bottom-10 -right-4 hidden w-40 overflow-hidden border-[6px] border-ivory sm:block lg:-right-12 lg:w-48">
-              <Image src="/images/about-moodboard.jpg" alt="Moodboard de materiales y acabados" width={508} height={737} sizes="192px" className="h-auto w-full" />
+      <section className="bg-canvas">
+        <div className="mx-auto grid max-w-[1400px] gap-14 px-5 py-28 sm:px-8 lg:grid-cols-12 lg:items-center lg:gap-20 lg:px-12 lg:py-40">
+          <div className="lg:col-span-5">
+            <div className="arch relative aspect-[4/5] overflow-hidden bg-canvas-3" data-reveal="img">
+              <Image src="/images/founders-1.jpg" alt="Daniela Ludeña y María José Dávila, fundadoras de Visual, diseñadoras de interiores" fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover object-top" />
             </div>
           </div>
           <div className="lg:col-span-7">
             <Eyebrow>Detrás del diseño</Eyebrow>
             <RevealLines
-              className="mt-6 font-display text-[clamp(2.2rem,4.4vw,3.8rem)] leading-[1.05]"
+              className="mt-6 font-display text-[clamp(2.4rem,4.6vw,4.2rem)] leading-[1.02]"
               lines={["Dos diseñadoras,", <span key="a" className="accent text-taupe-deep">una misma visión</span>]}
             />
             <div className="mt-8 max-w-xl space-y-5 leading-relaxed" data-reveal="up">
@@ -251,42 +221,33 @@ export default function Home() {
                 transformar emociones en espacios.
               </p>
               <p>
-                Con más de 20 años de experiencia, combinan creatividad, técnica y
-                sensibilidad para que cada proyecto refleje la esencia de quien lo habita.
-                Para ellas, diseñar no es solo estética: es crear armonía, bienestar y
-                funcionalidad en cada detalle.
+                Combinan creatividad, técnica y sensibilidad para que cada proyecto
+                refleje la esencia de quien lo habita.
               </p>
             </div>
             <div className="mt-10 flex flex-wrap items-center gap-8" data-reveal="up" style={delay(0.1)}>
               <div>
-                <p className="font-display text-xl text-ink">Daniela Ludeña</p>
+                <p className="font-display text-2xl text-ink">Daniela Ludeña</p>
                 <p className="eyebrow mt-1">Co-fundadora</p>
               </div>
               <span className="h-10 w-px bg-ink/15" aria-hidden="true" />
               <div>
-                <p className="font-display text-xl text-ink">María José Dávila</p>
+                <p className="font-display text-2xl text-ink">María José Dávila</p>
                 <p className="eyebrow mt-1">Co-fundadora</p>
               </div>
             </div>
-            <Link href="/sobre-nosotros" className="btn btn-outline mt-10" data-reveal="up">
-              Sobre nosotras <ArrowIcon />
-            </Link>
           </div>
         </div>
       </section>
 
       {/* ───────────── Testimonio ───────────── */}
-      <section className="bg-linen">
-        <div className="mx-auto max-w-4xl px-5 py-24 text-center sm:px-8 lg:py-36">
-          <p className="font-display text-7xl leading-none text-taupe" aria-hidden="true">“</p>
+      <section className="bg-canvas-2">
+        <div className="mx-auto max-w-4xl px-5 py-28 text-center sm:px-8 lg:py-40">
+          <p className="font-display text-8xl leading-none text-taupe" aria-hidden="true">“</p>
           {testimonials.map((t) => (
             <figure key={t.name}>
               <blockquote>
-                <RevealLines
-                  as="p"
-                  className="font-display text-[clamp(1.6rem,3.2vw,2.6rem)] leading-[1.3] text-ink"
-                  lines={[t.quote]}
-                />
+                <RevealLines as="p" className="font-display text-[clamp(1.8rem,3.4vw,2.9rem)] leading-[1.25] text-ink" lines={[t.quote]} />
               </blockquote>
               <figcaption className="mt-8" data-reveal="up">
                 <span className="eyebrow">{t.name}</span>
@@ -297,13 +258,62 @@ export default function Home() {
         </div>
       </section>
 
-      <CtaBand
-        title={["Recorre nuestro", <span key="a" className="accent text-sand">showroom digital</span>]}
-        text="Mira nuestros proyectos en pantalla completa y alta resolución, ambiente por ambiente, desde donde estés."
-        image="/images/proyectos/casa-betania/03.jpg"
-        cta={{ href: "/showroom-virtual", label: "Entrar al showroom" }}
-        waMessage="Hola Visual, vi su showroom digital y me gustaría diseñar mi espacio."
-      />
+      {/* ───────────── Del valle a la ciudad (SEO local) ───────────── */}
+      <section className="relative overflow-hidden bg-espresso">
+        <div className="parallax absolute inset-0">
+          <Image src={`${I}/jardin-nocturno.jpg`} alt="" fill sizes="100vw" className="object-cover opacity-40" />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-espresso via-espresso/70 to-espresso/20" />
+        <div className="relative mx-auto grid max-w-[1400px] gap-12 px-5 py-28 sm:px-8 lg:grid-cols-12 lg:px-12 lg:py-40">
+          <div className="lg:col-span-7">
+            <Eyebrow className="text-sand">Del valle a la ciudad</Eyebrow>
+            <RevealLines
+              as="h2"
+              className="mt-6 font-display text-[clamp(2.4rem,5vw,4.6rem)] leading-[1] text-ivory"
+              lines={["Diseño de interiores en", <span key="a" className="accent text-sand">Quito, Cumbayá y Tumbaco</span>]}
+            />
+            <p className="mt-8 max-w-xl leading-relaxed text-ivory/75" data-reveal="up">
+              Nuestro estudio está en Cumbayá y acompañamos proyectos en todo Quito, Tumbaco,
+              Nayón y Puembo: casas y departamentos, oficinas, consultorios y locales
+              comerciales. Visitamos tu espacio, diseñamos la propuesta y coordinamos la
+              ejecución hasta la entrega.
+            </p>
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row" data-reveal="up" style={delay(0.1)}>
+              <Link href="/diseno-de-interiores-cumbaya" className="btn btn-light">
+                Diseño de interiores en Cumbayá <ArrowIcon />
+              </Link>
+              <Link href="/portafolio" className="btn btn-outline-light">
+                Ver portafolio
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ───────────── Showroom digital ───────────── */}
+      <section className="bg-canvas">
+        <div className="mx-auto max-w-[1400px] px-5 py-28 sm:px-8 lg:px-12 lg:py-36">
+          <div className="glass relative overflow-hidden rounded-[2.25rem] px-6 py-16 text-center sm:px-14 lg:py-24" data-reveal="up">
+            <p className="eyebrow">Showroom digital</p>
+            <RevealLines
+              className="mx-auto mt-6 max-w-3xl font-display text-[clamp(2.4rem,5vw,4.6rem)] leading-[1]"
+              lines={["Recorre nuestros", <span key="a" className="accent text-taupe-deep">proyectos reales</span>]}
+            />
+            <p className="mx-auto mt-6 max-w-lg leading-relaxed">
+              Casas, oficinas, consultorios y locales que ya diseñamos, en pantalla completa
+              y alta resolución.
+            </p>
+            <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
+              <Link href="/showroom-virtual" className="btn btn-primary">
+                Entrar al showroom <ArrowIcon />
+              </Link>
+              <TrackLink event="whatsapp_click" placement="home-showroom" href={waLink()} className="btn btn-outline">
+                <WhatsAppIcon className="h-4 w-4" /> Escríbenos
+              </TrackLink>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <FaqSection faqs={homeFaqs} />
 

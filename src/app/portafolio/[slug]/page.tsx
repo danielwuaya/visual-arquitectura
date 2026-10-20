@@ -102,14 +102,14 @@ export default async function CasePage({ params }: PageProps<"/portafolio/[slug]
         </div>
 
         <div className="mx-auto mt-14 max-w-[1400px] px-5 sm:px-8 lg:mt-20 lg:px-12">
-          <div className={`hero-unveil parallax relative overflow-hidden bg-sand ${landscapeHero ? "aspect-[3/2] sm:aspect-[21/10]" : "aspect-[4/5] sm:aspect-[16/10]"}`} style={delay(0.35)}>
+          <div className={`hero-unveil parallax relative overflow-hidden bg-canvas-3 ${landscapeHero ? "aspect-[3/2] sm:aspect-[21/10]" : "aspect-[4/5] sm:aspect-[16/10]"}`} style={delay(0.35)}>
             <Image src={hero.src} alt={hero.alt} fill priority sizes="(min-width: 1400px) 1300px, 100vw" className={`object-cover ${landscapeHero ? "" : "object-[50%_30%]"}`} />
           </div>
         </div>
       </section>
 
       {/* Sobre el proyecto */}
-      <section className="bg-ivory">
+      <section className="bg-canvas">
         <div className="mx-auto grid max-w-[1400px] gap-12 px-5 py-24 sm:px-8 lg:grid-cols-12 lg:gap-20 lg:px-12 lg:py-32">
           <div className="lg:col-span-5">
             <Eyebrow>El proyecto</Eyebrow>
@@ -150,7 +150,7 @@ export default async function CasePage({ params }: PageProps<"/portafolio/[slug]
       </section>
 
       {/* Galería */}
-      <section id="galeria" className="bg-linen">
+      <section id="galeria" className="bg-canvas-2">
         <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
           <div className="mb-12 flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
             <RevealLines className="font-display text-[clamp(2rem,3.8vw,3.2rem)] leading-[1.08]" lines={["Galería del", <span key="a" className="accent text-taupe-deep">proyecto</span>]} />
@@ -165,7 +165,7 @@ export default async function CasePage({ params }: PageProps<"/portafolio/[slug]
               <Eyebrow>Detrás de escena · el proceso de obra</Eyebrow>
               <div className="mt-8 grid grid-cols-2 gap-4 lg:w-2/3">
                 {c.process.map((p, i) => (
-                  <div key={p.src} className="zoom relative aspect-[3/4] overflow-hidden bg-sand" data-reveal="img" style={delay(i * 0.1)}>
+                  <div key={p.src} className="zoom relative aspect-[3/4] overflow-hidden bg-canvas-3" data-reveal="img" style={delay(i * 0.1)}>
                     <Image src={p.src} alt={p.alt} fill sizes="(min-width: 1024px) 30vw, 50vw" className="object-cover" />
                   </div>
                 ))}
@@ -176,7 +176,7 @@ export default async function CasePage({ params }: PageProps<"/portafolio/[slug]
       </section>
 
       {/* Siguiente proyecto */}
-      <Link href={`/portafolio/${next.slug}`} className="group relative block overflow-hidden bg-ink text-ivory">
+      <Link href={`/portafolio/${next.slug}`} className="group relative block overflow-hidden bg-espresso text-ivory">
         <div className="parallax absolute inset-0">
           <Image src={next.images[0].src} alt="" fill sizes="100vw" className="object-cover opacity-40 transition-opacity duration-700 group-hover:opacity-55" />
         </div>
@@ -185,7 +185,7 @@ export default async function CasePage({ params }: PageProps<"/portafolio/[slug]
             <p className="eyebrow text-sand">Siguiente proyecto</p>
             <p className="mt-4 font-display text-[clamp(2.4rem,6vw,5.5rem)] leading-none text-ivory">{next.title}</p>
           </div>
-          <span className="flex h-16 w-16 items-center justify-center rounded-full border border-ivory/50 transition-all duration-500 group-hover:bg-ivory group-hover:text-ink">
+          <span className="flex h-16 w-16 items-center justify-center rounded-full border border-ivory/50 transition-all duration-500 group-hover:bg-ivory group-hover:text-espresso">
             <ArrowIcon className="h-6 w-6" />
           </span>
         </div>

@@ -54,7 +54,7 @@ export default function Cumbaya() {
         </div>
       </PageHeader>
 
-      <section className="bg-ivory">
+      <section className="bg-canvas">
         <div className="mx-auto grid max-w-[1400px] gap-12 px-5 py-24 sm:px-8 lg:grid-cols-12 lg:gap-20 lg:px-12 lg:py-32">
           <div className="lg:col-span-5">
             <Eyebrow>Por qué un estudio local</Eyebrow>
@@ -80,7 +80,7 @@ export default function Cumbaya() {
         </div>
       </section>
 
-      <section className="bg-linen">
+      <section className="bg-canvas-2">
         <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
           <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
             <RevealLines className="font-display text-[clamp(2rem,3.8vw,3.2rem)] leading-[1.08]" lines={["Lo que diseñamos", <span key="a" className="accent text-taupe-deep">en el valle</span>]} />
@@ -89,7 +89,7 @@ export default function Cumbaya() {
           <div className="mt-12 grid grid-cols-2 gap-4 lg:grid-cols-4">
             {featured.map((p, i) => (
               <figure key={p.src} data-reveal="up" style={delay(i * 0.08)}>
-                <div className="zoom relative aspect-[3/4] overflow-hidden bg-sand">
+                <div className="zoom relative aspect-[3/4] overflow-hidden bg-canvas-3">
                   <Image src={p.src} alt={p.alt} fill sizes="(min-width: 1024px) 25vw, 50vw" className="object-cover" />
                 </div>
                 <figcaption className="mt-3 text-sm">{p.title}</figcaption>
@@ -110,7 +110,7 @@ export default function Cumbaya() {
         </div>
       </section>
 
-      <section className="bg-ivory">
+      <section className="bg-canvas">
         <div className="mx-auto grid max-w-[1400px] gap-12 px-5 py-24 sm:px-8 lg:grid-cols-12 lg:px-12 lg:py-32">
           <div className="lg:col-span-5">
             <Eyebrow>Zonas que atendemos</Eyebrow>
@@ -120,7 +120,7 @@ export default function Cumbaya() {
               ))}
             </ul>
           </div>
-          <div className="relative aspect-[4/3] overflow-hidden bg-sand lg:col-span-7" data-reveal="img">
+          <div className="relative aspect-[4/3] overflow-hidden bg-canvas-3 lg:col-span-7" data-reveal="img">
             <Image src="/images/proyectos/casa-betania/10.jpg" alt="Sala de estar con ventanales y vista a las montañas del valle" fill sizes="(min-width: 1024px) 58vw, 100vw" className="object-cover" />
           </div>
         </div>

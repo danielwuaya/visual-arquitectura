@@ -75,7 +75,7 @@ export default async function ServicePage({ params }: PageProps<"/servicios/[slu
       </PageHeader>
 
       {/* Qué incluye */}
-      <section className="bg-ivory">
+      <section className="bg-canvas">
         <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
           <div className="grid gap-8 lg:grid-cols-12">
             <div className="lg:col-span-5">
@@ -100,11 +100,11 @@ export default async function ServicePage({ params }: PageProps<"/servicios/[slu
       </section>
 
       {/* Galería + ideal para */}
-      <section className="bg-linen">
+      <section className="bg-canvas-2">
         <div className="mx-auto grid max-w-[1400px] gap-12 px-5 py-24 sm:px-8 lg:grid-cols-12 lg:gap-16 lg:px-12 lg:py-32">
           <div className="grid grid-cols-2 gap-4 lg:col-span-7">
             {gallery.map((p, i) => (
-              <div key={p.src} className={`zoom relative overflow-hidden bg-sand ${i === 0 ? "col-span-2 aspect-[16/10]" : "aspect-[3/4]"}`} data-reveal="img" style={delay(i * 0.08)}>
+              <div key={p.src} className={`zoom relative overflow-hidden bg-canvas-3 ${i === 0 ? "col-span-2 aspect-[16/10]" : "aspect-[3/4]"}`} data-reveal="img" style={delay(i * 0.08)}>
                 <Image src={p.src} alt={p.alt} fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" />
               </div>
             ))}
@@ -127,7 +127,7 @@ export default async function ServicePage({ params }: PageProps<"/servicios/[slu
       </section>
 
       {related.length > 0 && (
-        <section className="bg-ivory">
+        <section className="bg-canvas">
           <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
             <Eyebrow>Proyectos reales</Eyebrow>
             <RevealLines className="mt-6 font-display text-[clamp(2rem,3.8vw,3.2rem)] leading-[1.08]" lines={["Mira lo que", <span key="a" className="accent text-taupe-deep">hemos diseñado</span>]} />
@@ -142,12 +142,12 @@ export default async function ServicePage({ params }: PageProps<"/servicios/[slu
       <FaqSection faqs={s.faqs} />
 
       {/* Otros servicios */}
-      <section className="bg-ivory">
+      <section className="bg-canvas">
         <div className="mx-auto max-w-[1400px] px-5 pb-24 sm:px-8 lg:px-12 lg:pb-32">
           <Eyebrow>Otros servicios</Eyebrow>
           <div className="mt-8 grid gap-6 sm:grid-cols-2">
             {others.map((o) => (
-              <Link key={o.slug} href={`/servicios/${o.slug}`} className="group flex items-center gap-6 border border-ink/15 p-4 transition-colors duration-500 hover:bg-linen" data-reveal="up">
+              <Link key={o.slug} href={`/servicios/${o.slug}`} className="group flex items-center gap-6 border border-ink/15 p-4 transition-colors duration-500 hover:bg-canvas-2" data-reveal="up">
                 <div className="zoom relative h-24 w-24 shrink-0 overflow-hidden">
                   <Image src={o.image} alt="" fill sizes="96px" className="object-cover" />
                 </div>

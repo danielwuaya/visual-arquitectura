@@ -38,13 +38,13 @@ export default function Servicios() {
         intro="Diseñamos, planificamos y acompañamos cada paso para crear espacios funcionales y estéticos en Quito, Cumbayá y Tumbaco."
       />
 
-      <section className="bg-ivory">
+      <section className="bg-canvas">
         <div className="mx-auto max-w-[1400px] space-y-24 px-5 py-20 sm:px-8 lg:space-y-36 lg:px-12 lg:py-28">
           {services.map((s, i) => (
             <article key={s.slug} className="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-16">
               <Link
                 href={`/servicios/${s.slug}`}
-                className={`zoom relative block aspect-[4/5] overflow-hidden bg-sand sm:aspect-[4/3] lg:col-span-7 ${i % 2 ? "lg:order-2" : ""}`}
+                className={`zoom relative block aspect-[4/5] overflow-hidden bg-canvas-3 sm:aspect-[4/3] lg:col-span-7 ${i % 2 ? "lg:order-2" : ""}`}
                 data-reveal="img"
                 tabIndex={-1}
                 aria-hidden="true"

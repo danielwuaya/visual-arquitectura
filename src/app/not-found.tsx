@@ -3,7 +3,7 @@ import { ArrowIcon } from "@/components/ui";
 
 export default function NotFound() {
   return (
-    <section className="grain relative flex min-h-[80svh] items-center bg-ivory pt-24">
+    <section className="grain relative flex min-h-[80svh] items-center bg-canvas pt-24">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
         <p className="eyebrow">Error 404</p>
         <h1 className="mt-6 font-display text-[clamp(2.6rem,6vw,5.5rem)] leading-[1.02]">

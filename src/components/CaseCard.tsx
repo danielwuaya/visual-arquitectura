@@ -18,13 +18,13 @@ export default function CaseCard({
   const cover = c.images[0];
   return (
     <Link href={`/portafolio/${c.slug}`} className="group block" data-reveal="up" style={delay((index % 3) * 0.1)}>
-      <div className={`zoom relative ${aspect} overflow-hidden bg-sand`} data-reveal="img" style={delay((index % 3) * 0.1)}>
+      <div className={`zoom relative ${aspect} overflow-hidden bg-canvas-3`} data-reveal="img" style={delay((index % 3) * 0.1)}>
         <Image src={cover.src} alt={cover.alt} fill sizes={sizes} className="object-cover" />
-        <span className="absolute inset-0 bg-gradient-to-t from-ink/55 via-transparent to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
-        <span className="absolute bottom-5 right-5 flex h-12 w-12 translate-y-3 items-center justify-center rounded-full bg-ivory text-ink opacity-0 transition-all duration-700 group-hover:translate-y-0 group-hover:opacity-100">
+        <span className="absolute inset-0 bg-gradient-to-t from-espresso/55 via-transparent to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
+        <span className="absolute bottom-5 right-5 flex h-12 w-12 translate-y-3 items-center justify-center rounded-full bg-ivory text-espresso opacity-0 transition-all duration-700 group-hover:translate-y-0 group-hover:opacity-100">
           <ArrowIcon />
         </span>
-        <span className="absolute left-5 top-5 rounded-full bg-ivory/90 px-3 py-1 text-[0.68rem] uppercase tracking-[0.18em] text-ink backdrop-blur">
+        <span className="absolute left-5 top-5 rounded-full bg-espresso/60 px-3 py-1 text-[0.68rem] uppercase tracking-[0.18em] text-ivory backdrop-blur">
           {categoryLabel[c.category]}
           {c.render && " · Render 3D"}
         </span>

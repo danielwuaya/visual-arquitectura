@@ -18,12 +18,12 @@ export default function WhatsAppButton() {
         className="group fixed bottom-8 right-8 z-[55] hidden h-14 w-14 items-center justify-center rounded-full bg-[#1f7a4d] text-white shadow-[0_18px_40px_-12px_rgb(0_0_0/0.45)] transition-transform duration-500 hover:scale-110 lg:flex"
       >
         <WhatsAppIcon className="h-7 w-7" />
-        <span className="pointer-events-none absolute right-[4.5rem] whitespace-nowrap rounded-full bg-ink px-4 py-2 text-xs text-ivory opacity-0 transition-all duration-500 group-hover:opacity-100">
+        <span className="pointer-events-none absolute right-[4.5rem] whitespace-nowrap rounded-full bg-espresso px-4 py-2 text-xs text-ivory opacity-0 transition-all duration-500 group-hover:opacity-100">
           ¿Hablamos de tu proyecto?
         </span>
       </TrackLink>
 
-      <div className="fixed inset-x-0 bottom-0 z-[55] grid grid-cols-2 border-t border-ink/10 bg-ivory/95 backdrop-blur-md lg:hidden" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
+      <div className="fixed inset-x-0 bottom-0 z-[55] grid grid-cols-2 border-t border-ink/10 bg-canvas/95 backdrop-blur-md lg:hidden" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
         <TrackLink
           event="whatsapp_click"
           placement="barra-movil"

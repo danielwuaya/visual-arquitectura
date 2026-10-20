@@ -119,7 +119,7 @@ export default function DigitalShowroom({ rooms }: { rooms: ShowroomRoom[] }) {
       <div
         ref={stageRef}
         data-lenis-prevent
-        className="relative h-[100svh] min-h-[560px] w-full scroll-mt-0 select-none overflow-hidden bg-ink text-ivory"
+        className="relative h-[100svh] min-h-[560px] w-full scroll-mt-0 select-none overflow-hidden bg-espresso text-ivory"
         onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
         onTouchEnd={(e) => {
           if (touchX.current === null) return;
@@ -134,7 +134,7 @@ export default function DigitalShowroom({ rooms }: { rooms: ShowroomRoom[] }) {
         <div key={`bg-${current.src}`} className="sr-fade absolute inset-0 scale-110 opacity-60 blur-2xl">
           <Image src={current.src} alt="" fill sizes="64px" quality={40} className="object-cover" />
         </div>
-        <div className="absolute inset-0 bg-ink/35" />
+        <div className="absolute inset-0 bg-espresso/35" />
 
         {/* Foto anterior (queda debajo mientras entra la nueva) */}
         {prevSrc && prevSrc !== current.src && (
@@ -162,8 +162,8 @@ export default function DigitalShowroom({ rooms }: { rooms: ShowroomRoom[] }) {
         </div>
 
         {/* Degradados para legibilidad */}
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-ink/70 to-transparent" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-72 bg-gradient-to-t from-ink/85 via-ink/40 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-espresso/70 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-72 bg-gradient-to-t from-espresso/85 via-espresso/40 to-transparent" />
 
         {/* Info superior */}
         <div className="absolute inset-x-0 top-0 flex items-start justify-between gap-4 px-5 pt-6 sm:px-8 lg:px-12 lg:pt-8">
@@ -228,7 +228,7 @@ export default function DigitalShowroom({ rooms }: { rooms: ShowroomRoom[] }) {
                   type="button"
                   onClick={() => goTo(i, 0)}
                   className={`group flex shrink-0 items-center gap-3 rounded-full border py-1.5 pl-1.5 pr-4 text-left text-xs transition-all duration-500 ${
-                    i === room ? "border-ivory bg-ivory text-ink" : "border-ivory/25 bg-ink/30 text-ivory/85 backdrop-blur hover:border-ivory/60"
+                    i === room ? "border-ivory bg-ivory text-espresso" : "border-ivory/25 bg-espresso/30 text-ivory/85 backdrop-blur hover:border-ivory/60"
                   }`}
                 >
                   <span className="relative h-8 w-8 overflow-hidden rounded-full">
@@ -258,7 +258,7 @@ export default function DigitalShowroom({ rooms }: { rooms: ShowroomRoom[] }) {
 
       {/* Acciones en móvil */}
       <div className="grid grid-cols-2 gap-px bg-ink/10 lg:hidden">
-        <Link href={`/portafolio/${rooms[room].slug}`} className="flex h-14 items-center justify-center bg-ivory text-[0.72rem] uppercase tracking-[0.16em] text-ink">
+        <Link href={`/portafolio/${rooms[room].slug}`} className="flex h-14 items-center justify-center bg-canvas text-[0.72rem] uppercase tracking-[0.16em] text-ink">
           Ver proyecto
         </Link>
         <a

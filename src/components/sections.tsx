@@ -89,7 +89,7 @@ export function ContactSection({
   placement?: string;
 }) {
   return (
-    <section id="contacto" className="bg-linen">
+    <section id="contacto" className="bg-canvas-2">
       <div className="mx-auto grid max-w-[1400px] gap-14 px-5 py-24 sm:px-8 lg:grid-cols-12 lg:gap-20 lg:px-12 lg:py-32">
         <div className="lg:col-span-5">
           <Eyebrow>Contacto</Eyebrow>
@@ -135,7 +135,7 @@ export function ContactSection({
             </li>
           </ul>
         </div>
-        <div className="bg-ivory p-6 shadow-[0_30px_80px_-40px_rgb(42_35_30/0.35)] sm:p-10 lg:col-span-7 lg:p-14" data-reveal="up" style={delay(0.15)}>
+        <div className="glass rounded-[2rem] p-6 sm:p-10 lg:col-span-7 lg:p-14" data-reveal="up" style={delay(0.15)}>
           <ContactForm placement={placement} />
         </div>
       </div>
@@ -146,7 +146,7 @@ export function ContactSection({
 /** Proceso de trabajo en 5 pasos. */
 export function ProcessSection({ dark = true }: { dark?: boolean }) {
   return (
-    <section className={dark ? "bg-espresso text-ivory/75" : "bg-ivory"}>
+    <section className={dark ? "bg-espresso text-ivory/75" : "bg-canvas"}>
       <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
@@ -166,7 +166,7 @@ export function ProcessSection({ dark = true }: { dark?: boolean }) {
           <span aria-hidden="true" className={`grow-line absolute left-0 right-0 top-[1.1rem] hidden h-px lg:block ${dark ? "bg-ivory/25" : "bg-ink/20"}`} />
           {steps.map((step, i) => (
             <li key={step.title} className="relative" data-reveal="up" style={delay(i * 0.1)}>
-              <span className={`relative z-10 flex h-9 w-9 items-center justify-center rounded-full border text-xs ${dark ? "border-taupe bg-espresso text-taupe" : "border-ink/30 bg-ivory text-taupe-deep"}`}>
+              <span className={`relative z-10 flex h-9 w-9 items-center justify-center rounded-full border text-xs ${dark ? "border-taupe bg-espresso text-taupe" : "border-ink/30 bg-canvas text-taupe-deep"}`}>
                 0{i + 1}
               </span>
               <h3 className={`mt-6 font-display text-xl ${dark ? "text-ivory" : ""}`}>{step.title}</h3>
@@ -182,7 +182,7 @@ export function ProcessSection({ dark = true }: { dark?: boolean }) {
 /** Preguntas frecuentes (el schema FAQPage se agrega en cada página). */
 export function FaqSection({ faqs, title = "Preguntas frecuentes" }: { faqs: FaqItem[]; title?: string }) {
   return (
-    <section className="bg-ivory">
+    <section className="bg-canvas">
       <div className="mx-auto grid max-w-[1400px] gap-12 px-5 py-24 sm:px-8 lg:grid-cols-12 lg:px-12 lg:py-32">
         <div className="lg:col-span-4">
           <Eyebrow>FAQ</Eyebrow>
@@ -218,11 +218,11 @@ export function CtaBand({
   cta?: { href: string; label: string };
 }) {
   return (
-    <section className="relative overflow-hidden bg-ink text-ivory">
+    <section className="relative overflow-hidden bg-espresso text-ivory">
       <div className="parallax absolute inset-0">
         <Image src={image} alt="" fill sizes="100vw" className="object-cover opacity-45" />
       </div>
-      <div className="absolute inset-0 bg-gradient-to-r from-ink/80 via-ink/50 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-espresso/80 via-espresso/50 to-transparent" />
       <div className="relative mx-auto max-w-[1400px] px-5 py-28 sm:px-8 lg:px-12 lg:py-40">
         <RevealLines className="max-w-3xl font-display text-[clamp(2.2rem,5vw,4.5rem)] leading-[1.04] text-ivory" lines={title} />
         <p className="mt-6 max-w-lg text-ivory/80" data-reveal="up">

@@ -53,7 +53,7 @@ export default function Showroom() {
         ]}
       />
 
-      <section className="grain relative bg-ivory pt-32 lg:pt-40">
+      <section className="grain relative bg-canvas pt-32 lg:pt-40">
         <div className="mx-auto grid max-w-[1400px] gap-8 px-5 pb-12 sm:px-8 lg:grid-cols-12 lg:items-end lg:px-12 lg:pb-16">
           <div className="lg:col-span-8">
             <p className="eyebrow hero-fade" style={delay(0.1)}>

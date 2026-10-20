@@ -49,7 +49,7 @@ export default function Header() {
           hidden && !open ? "-translate-y-full" : "translate-y-0"
         } ${
           scrolled && !open
-            ? "bg-ivory/85 shadow-[0_1px_0_rgb(28_23_20/0.08)] backdrop-blur-md"
+            ? "bg-canvas/80 shadow-[0_1px_0_rgb(243_239_232/0.08)] backdrop-blur-xl"
             : "bg-transparent"
         }`}
       >
@@ -58,7 +58,7 @@ export default function Header() {
             href="/"
             className={`relative z-[70] leading-none transition-colors duration-500 ${open ? "text-ivory" : "text-ink"}`}
           >
-            <span className="block font-display text-[1.6rem] tracking-logo">VISUAL</span>
+            <span className="block font-display text-[1.75rem] tracking-logo">VISUAL</span>
             <span className="mt-1.5 block font-sans text-[0.55rem] font-normal tracking-[0.42em]">
               DISEÑO DE INTERIORES
             </span>
@@ -70,7 +70,7 @@ export default function Header() {
                 key={item.href}
                 href={item.href}
                 aria-current={isActive(item.href) ? "page" : undefined}
-                className={`link-u font-sans text-[0.72rem] uppercase tracking-[0.2em] text-ink ${
+                className={`link-u font-sans text-[0.92rem] text-ink/80 transition-colors hover:text-ink ${
                   isActive(item.href) ? "is-active" : ""
                 }`}
               >

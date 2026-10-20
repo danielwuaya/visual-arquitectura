@@ -46,7 +46,7 @@ export default function Portafolio() {
         title={["Transformamos espacios,", <span key="a" className="accent text-taupe-deep">creamos experiencias</span>]}
         intro="Una selección de proyectos residenciales, corporativos y comerciales diseñados por Visual en Quito y Cumbayá."
       />
-      <section className="bg-ivory">
+      <section className="bg-canvas">
         <div className="mx-auto grid max-w-[1400px] gap-x-8 gap-y-20 px-5 pb-24 pt-16 sm:grid-cols-2 sm:px-8 lg:grid-cols-3 lg:px-12 lg:pb-32">
           {caseStudies.map((c, i) => (
             <div key={c.slug} className={i % 3 === 1 ? "lg:mt-20" : ""}>
@@ -55,7 +55,7 @@ export default function Portafolio() {
           ))}
         </div>
       </section>
-      <section className="bg-linen">
+      <section className="bg-canvas-2">
         <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
           <Eyebrow>Más espacios</Eyebrow>
           <RevealLines className="mb-12 mt-6 font-display text-[clamp(2rem,3.8vw,3.2rem)] leading-[1.08]" lines={["Otros ambientes", <span key="a" className="accent text-taupe-deep">que diseñamos</span>]} />

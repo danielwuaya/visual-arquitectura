@@ -52,7 +52,7 @@ export default function SobreNosotros() {
         imageAlt="Diseñadora de Visual dibujando un plano de interiores en el estudio"
       />
 
-      <section className="bg-ivory">
+      <section className="bg-canvas">
         <div className="mx-auto grid max-w-[1400px] gap-14 px-5 py-24 sm:px-8 lg:grid-cols-12 lg:items-center lg:gap-20 lg:px-12 lg:py-32">
           <div className="lg:col-span-6">
             <Eyebrow>Nuestra historia</Eyebrow>
@@ -72,17 +72,17 @@ export default function SobreNosotros() {
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4 lg:col-span-6">
-            <div className="arch relative aspect-[3/4] overflow-hidden bg-sand" data-reveal="img">
+            <div className="arch relative aspect-[3/4] overflow-hidden bg-canvas-3" data-reveal="img">
               <Image src="/images/founders-2.jpg" alt="Daniela y María José en su estudio de diseño de interiores en Cumbayá" fill sizes="(min-width: 1024px) 25vw, 50vw" className="object-cover" />
             </div>
-            <div className="relative mt-16 aspect-[3/4] overflow-hidden bg-sand" data-reveal="img" style={delay(0.12)}>
+            <div className="relative mt-16 aspect-[3/4] overflow-hidden bg-canvas-3" data-reveal="img" style={delay(0.12)}>
               <Image src="/images/about-moodboard-2.jpg" alt="Selección de materiales, muestras y paleta de colores para un proyecto" fill sizes="(min-width: 1024px) 25vw, 50vw" className="object-cover" />
             </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-linen">
+      <section className="bg-canvas-2">
         <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
           <div className="text-center">
             <Eyebrow className="justify-center">Fundadoras</Eyebrow>
@@ -91,7 +91,7 @@ export default function SobreNosotros() {
           <div className="mx-auto mt-16 grid max-w-4xl gap-10 sm:grid-cols-2">
             {founders.map((f, i) => (
               <figure key={f.name} className="text-center" data-reveal="up" style={delay(i * 0.12)}>
-                <div className="zoom arch relative mx-auto aspect-[3/4] w-full max-w-sm overflow-hidden bg-sand">
+                <div className="zoom arch relative mx-auto aspect-[3/4] w-full max-w-sm overflow-hidden bg-canvas-3">
                   <Image src={f.image} alt={`${f.name}, diseñadora de interiores y co-fundadora de Visual`} fill sizes="(min-width: 640px) 384px, 100vw" className="object-cover object-top" />
                 </div>
                 <figcaption className="mt-6">
@@ -104,7 +104,7 @@ export default function SobreNosotros() {
         </div>
       </section>
 
-      <section className="bg-ivory">
+      <section className="bg-canvas">
         <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
           <Eyebrow>Lo que nos guía</Eyebrow>
           <div className="mt-12 grid gap-12 md:grid-cols-3">

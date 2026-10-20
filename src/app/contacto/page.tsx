@@ -30,7 +30,7 @@ export default function Contacto() {
           { "@context": "https://schema.org", "@type": "ContactPage", url: `${siteUrl}/contacto`, about: { "@id": businessId } },
         ]}
       />
-      <section className="grain relative bg-ivory pt-32 lg:pt-44">
+      <section className="grain relative bg-canvas pt-32 lg:pt-44">
         <div className="mx-auto grid max-w-[1400px] gap-14 px-5 pb-24 sm:px-8 lg:grid-cols-12 lg:gap-20 lg:px-12 lg:pb-32">
           <div className="lg:col-span-5">
             <p className="eyebrow hero-fade" style={delay(0.1)}>Contacto</p>
@@ -71,7 +71,7 @@ export default function Contacto() {
               </dl>
             </div>
           </div>
-          <div className="hero-fade bg-white/60 p-6 shadow-[0_30px_80px_-40px_rgb(42_35_30/0.35)] sm:p-10 lg:col-span-7 lg:p-14" style={delay(0.4)}>
+          <div className="hero-fade glass rounded-[2rem] p-6 sm:p-10 lg:col-span-7 lg:p-14" style={delay(0.4)}>
             <ContactForm placement="pagina-contacto" />
           </div>
         </div>
