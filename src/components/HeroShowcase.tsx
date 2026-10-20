@@ -46,25 +46,25 @@ export default function HeroShowcase({ slides }: { slides: HeroSlide[] }) {
 
       {/* Tarjeta de vidrio */}
       <div className="glass hero-fade absolute right-4 top-4 hidden w-[19rem] rounded-[1.75rem] p-7 text-ivory sm:block lg:right-8 lg:top-1/2 lg:w-[21rem] lg:-translate-y-1/2" style={delay(1)}>
-        <p className="eyebrow text-ivory/70">Nuestra filosofía</p>
+        <p className="eyebrow text-ivory/85">Nuestra filosofía</p>
         <p className="mt-4 font-display text-[2.1rem] leading-[1.05] text-ivory">
           Armonía, estilo <span className="accent">y bienestar</span>
         </p>
-        <p className="mt-4 text-[0.95rem] leading-relaxed text-ivory/75">
+        <p className="mt-4 text-[0.95rem] leading-relaxed text-ivory/90">
           Cada espacio nace de escuchar cómo vives. Luz, materiales y proporción
           en equilibrio, diseñados al detalle.
         </p>
-        <div className="mt-6 flex items-center gap-2 border-t border-white/10 pt-5">
+        <div className="mt-6 flex items-center gap-2 border-t border-white/15 pt-5">
           {slides.map((s, n) => (
             <button
               key={s.src}
               type="button"
               onClick={() => setI(n)}
               aria-label={`Ver ${s.label}`}
-              className={`h-[3px] rounded-full transition-all duration-700 ${n === i ? "w-8 bg-ivory" : "w-3 bg-ivory/30 hover:bg-ivory/60"}`}
+              className={`h-[3px] rounded-full transition-all duration-700 ${n === i ? "w-8 bg-ivory" : "w-3 bg-ivory/45 hover:bg-ivory/75"}`}
             />
           ))}
-          <span key={i} className="sr-text ml-auto text-xs text-ivory/70">{slides[i].label}</span>
+          <span key={i} className="sr-text ml-auto text-xs text-ivory/85">{slides[i].label}</span>
         </div>
       </div>
 
