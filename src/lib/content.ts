@@ -69,14 +69,10 @@ export const services: Service[] = [
       "Diseñamos casas, departamentos y Airbnb en Quito, Cumbayá y Tumbaco. Distribución, materiales, iluminación y mobiliario a medida, del concepto a la ejecución.",
     intro:
       "Tu casa debería sentirse como tú. Diseñamos casas, departamentos y Airbnb en Quito, Cumbayá y Tumbaco con un equilibrio cuidadoso entre estética, funcionalidad y bienestar, desde el primer boceto hasta el último detalle.",
-    image: "/images/proyectos/casa-betania/01.jpg",
-    imageAlt: "Dormitorio infantil con cabeceras en forma de nube, Casa Betania",
-    heroImage: "/images/proyectos/casa-betania/02.jpg",
-    gallery: [
-      "/images/project-kitchen-island.jpg",
-      "/images/project-bathroom-visual.jpg",
-      "/images/project-tv-corridor.jpg",
-    ],
+    image: "/images/inspiracion/sala-doble-altura.jpg",
+    imageAlt: "Sala de doble altura con lámpara escultórica de fibras naturales",
+    heroImage: "/images/inspiracion/cocina-roble.jpg",
+    gallery: ["/images/inspiracion/dormitorio-nogal.jpg", "/images/inspiracion/bano-spa.jpg", "/images/inspiracion/banca-ventana.jpg"],
     includes: [
       { title: "Distribución y planos", text: "Optimizamos cada metro para que el espacio fluya y responda a cómo vives." },
       { title: "Concepto y materiales", text: "Paletas, texturas y acabados que crean una atmósfera coherente en toda la casa." },
@@ -109,14 +105,10 @@ export const services: Service[] = [
       "Diseño interior de oficinas en Quito y Cumbayá: distribución, iluminación, acústica y mobiliario funcional que potencian la productividad y reflejan tu marca.",
     intro:
       "Un buen espacio de trabajo se nota en la energía del equipo. Diseñamos oficinas en Quito y Cumbayá que cuidan la distribución, la iluminación y el mobiliario para potenciar la motivación, la eficiencia y la identidad de cada empresa.",
-    image: "/images/proyectos/consultorio-axxis/01.jpg",
-    imageAlt: "Recepción del Consultorio Axxis con panel de listones, diseño corporativo",
-    heroImage: "/images/proyectos/consultorio-axxis/02.jpg",
-    gallery: [
-      "/images/category-corporativo.jpg",
-      "/images/project-chapel.jpg",
-      "/images/project-bar.jpg",
-    ],
+    image: "/images/inspiracion/oficina-concreto.jpg",
+    imageAlt: "Oficina contemporánea con concreto, madera y lámparas colgantes",
+    heroImage: "/images/inspiracion/lounge-ejecutivo.jpg",
+    gallery: ["/images/inspiracion/sala-reuniones-vidrio.jpg", "/images/inspiracion/oficina-dos-escritorios.jpg", "/images/inspiracion/estudio-sala.jpg"],
     includes: [
       { title: "Planificación del espacio", text: "Puestos, salas de reunión y zonas comunes distribuidas según cómo trabaja tu equipo." },
       { title: "Identidad de marca", text: "Colores, materiales y detalles que hacen que tu oficina hable de tu empresa." },
@@ -148,14 +140,10 @@ export const services: Service[] = [
       "Diseñamos tiendas, boutiques, showrooms y locales comerciales en Quito y Cumbayá con un diseño estratégico que atrae clientes y refleja tu marca.",
     intro:
       "Tu espacio habla por tu marca. Diseñamos tiendas, boutiques, showrooms y locales en Quito y Cumbayá con una estrategia clara: atraer, guiar al cliente y convertir la visita en venta.",
-    image: "/images/proyectos/boutique-almara/01.jpg",
-    imageAlt: "Recepción de la Boutique Almara con counter curvo menta",
-    heroImage: "/images/proyectos/boutique-almara/02.jpg",
-    gallery: [
-      "/images/project-retail-1.jpg",
-      "/images/project-bar.jpg",
-      "/images/category-comercial.jpg",
-    ],
+    image: "/images/inspiracion/lounge-ejecutivo.jpg",
+    imageAlt: "Lounge con paneles de madera, sillones de cuero y luz cálida",
+    heroImage: "/images/inspiracion/tv-divisor-luz.jpg",
+    gallery: ["/images/inspiracion/jardin-nocturno.jpg", "/images/inspiracion/bano-azul.jpg", "/images/inspiracion/sala-reuniones-vidrio.jpg"],
     includes: [
       { title: "Recorrido del cliente", text: "Distribución que guía la mirada y el paso hacia tus productos clave." },
       { title: "Exhibición y vitrinas", text: "Mobiliario de exhibición a medida que pone tu producto en primer plano." },
@@ -177,6 +165,23 @@ export const services: Service[] = [
     waMessage: "Hola Visual, me interesa el diseño de un local comercial.",
   },
 ];
+
+/** Imágenes aspiracionales (inspiración) con su texto alternativo. */
+export const inspirationAlt: Record<string, string> = {
+  "/images/inspiracion/sala-doble-altura.jpg": "Sala de doble altura con lámpara escultórica de fibras naturales",
+  "/images/inspiracion/cocina-roble.jpg": "Cocina blanca con madera de roble, listones e iluminación lineal",
+  "/images/inspiracion/dormitorio-nogal.jpg": "Dormitorio cálido con cabecera tapizada y vestidor en nogal",
+  "/images/inspiracion/bano-spa.jpg": "Baño tipo spa con tina de piedra y jardín interior",
+  "/images/inspiracion/banca-ventana.jpg": "Bancas de ventana en madera con cojines y vista a la montaña",
+  "/images/inspiracion/oficina-concreto.jpg": "Oficina contemporánea con concreto, madera y lámparas colgantes",
+  "/images/inspiracion/lounge-ejecutivo.jpg": "Oficina ejecutiva con paneles de madera, luz indirecta y sala de cuero",
+  "/images/inspiracion/sala-reuniones-vidrio.jpg": "Sala de reuniones con paredes de vidrio y perfilería negra",
+  "/images/inspiracion/oficina-dos-escritorios.jpg": "Oficina con dos escritorios de madera y biblioteca iluminada",
+  "/images/inspiracion/estudio-sala.jpg": "Estudio con escritorio de madera, sala y lámpara lineal",
+  "/images/inspiracion/tv-divisor-luz.jpg": "Mueble divisor con TV, luz indirecta y comedor al fondo",
+  "/images/inspiracion/jardin-nocturno.jpg": "Pasillo exterior ajardinado con iluminación cálida nocturna",
+  "/images/inspiracion/bano-azul.jpg": "Baño con azulejos azules artesanales y mueble de madera",
+};
 
 export const process = [
   { title: "Agenda tu asesoría", text: "Conversamos sobre tu espacio, tus necesidades y tu estilo, y visitamos el lugar para entender su potencial." },

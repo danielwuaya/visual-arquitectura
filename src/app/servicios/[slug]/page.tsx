@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { services } from "@/lib/content";
+import { inspirationAlt, services } from "@/lib/content";
 import { caseStudies } from "@/lib/cases";
 import CaseCard from "@/components/CaseCard";
 import { waLink } from "@/lib/site";
@@ -44,8 +44,7 @@ export default async function ServicePage({ params }: PageProps<"/servicios/[slu
   ];
   const others = services.filter((x) => x.slug !== s.slug);
   const related = caseStudies.filter((c) => c.service === s.slug);
-  const allImgs = caseStudies.flatMap((c) => c.images);
-  const gallery = related.flatMap((c) => c.images).filter((i) => i.src !== s.heroImage).slice(0, 3);
+  const gallery = s.gallery.map((src) => ({ src, alt: inspirationAlt[src] ?? s.name }));
 
   return (
     <>
@@ -62,7 +61,7 @@ export default async function ServicePage({ params }: PageProps<"/servicios/[slu
         title={[s.h1]}
         intro={s.intro}
         image={s.heroImage}
-        imageAlt={allImgs.find((i) => i.src === s.heroImage)?.alt}
+        imageAlt={s.heroImage ? inspirationAlt[s.heroImage] : undefined}
       >
         <div className="hero-fade mt-10 flex flex-col gap-3 sm:flex-row" style={delay(0.7)}>
           <Link href="#contacto" className="btn btn-primary">
